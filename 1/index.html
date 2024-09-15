@@ -26,7 +26,7 @@
         However, in some photos the snapshots differ heavily (e.g. because a large object in the photo is overwhelmingly blue). For these photos, cross-correlation may not accurately measure similarity. 
 
         To combat this, we calculate the pixel-by-pixel gradient of each snapshot, yielding "edge-strength" snapshots. 
-        The cross-correlation metric works better on edge-strength snapshots than on the originals because snapshots of the same photo almost always display edges similarly even when they display brightness differently.
+        The cross-correlation metric works better on edge-strength snapshots than on the originals because snapshots from the same photo almost always display edges similarly even when they display brightness differently.
     </p>
     <p>
         Our other optimization is to only consider the center portion of each edge-strength snapshot when calculating the cross-correlation metric. 
