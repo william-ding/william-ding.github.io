@@ -12,9 +12,9 @@
 <body>
     <h1>Project 1: Colorizing the Prokudin-Gorskii photo collection</h1>
     
-    <p>The Prokudin-Gorskii collection consists of thousands of photos that capture Russia in the early 20th century. 
+    <p>The Prokudin-Gorskii collection is thousands of photos of Russia in the early 20th century. 
         Each photo in the collection is actually three snapshots that separately capture red, green, and blue light. 
-        This project uses code to align the three snapshots, producing a color version of the original photo.
+        This project uses code to align the three snapshots of a photo, producing a color version.
     </p>
     <p> 
         The pixel-by-pixel cross-correlation between two snapshots approximates their similarity. 
@@ -26,7 +26,7 @@
         However, in some photos the snapshots differ heavily (e.g. because a large object in the photo is overwhelmingly blue). For these photos, cross-correlation may not accurately measure similarity. 
 
         To combat this, we calculate the pixel-by-pixel gradient of each snapshot, yielding "edge-strength" snapshots. 
-        The cross-correlation metric works better on edge-strength snapshots than the originals because snapshots of the same photo almost always depict edges similarly even when they depict brightness differently.
+        The cross-correlation metric works better on edge-strength snapshots than on the originals because snapshots of the same photo almost always display edges similarly even when they display brightness differently.
     </p>
     <p>
         Our other optimization is to only consider the center portion of each edge-strength snapshot when calculating the cross-correlation metric. 
