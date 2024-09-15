@@ -14,7 +14,8 @@
 <body>
     <h1>Project 1: Colorizing the Prokudin-Gorskii photo collection</h1>
 
-    <p>The Prokudin-Gorskii collection is thousands of photos of Russia in the early 20th century.
+    <p>
+        The Prokudin-Gorskii collection is thousands of photos of Russia in the early 20th century.
         Each photo in the collection is actually three snapshots that separately capture red, green, and blue light.
         This project uses code to align the three snapshots of a photo, producing a color version.
     </p>
@@ -26,19 +27,43 @@
         For larger snapshots, we employ a "pyramid" approach: an approximate alignment is found for very small versions
         of the snapshots, and the alignment is refined on successively larger versions.
     </p>
-    The cross-correlation metric suffices for most photos in the collection.
-    However, in some photos the snapshots differ heavily (e.g. because a large object in the photo is overwhelmingly
-    blue). For these photos, cross-correlation may not accurately measure similarity.
+        The cross-correlation metric suffices for most photos in the collection.
+        However, in some photos the snapshots differ heavily (e.g. because a large object in the photo is overwhelmingly
+        blue). For these photos, cross-correlation may not accurately measure similarity.
 
-    To combat this, we calculate the pixel-by-pixel gradient of each snapshot, yielding "edge-strength" snapshots.
-    The cross-correlation metric works better on edge-strength snapshots than on the originals because snapshots from
-    the same photo almost always display edges similarly even when they display brightness differently.
+        To combat this, we calculate the pixel-by-pixel gradient of each snapshot, yielding "edge-strength" snapshots.
+        The cross-correlation metric works better on edge-strength snapshots than on the originals because snapshots from
+        the same photo almost always display edges similarly even when they display brightness differently.
     </p>
     <p>
         Our other optimization is to only consider the center portion of each edge-strength snapshot when calculating
         the cross-correlation metric.
         This prevents the artifacts on the edge of each snapshot from influencing the metric.
     </p>
+
+    <h2>Comparison</h2>
+    <img src="media/out_emir.jpg" alt="Emir">
+
+    <h2>Small Photos</h2>
+    <img src="media/out_church.jpg" alt="Church">
+    <img src="media/out_monastery.jpg" alt="Monastery">
+    <img src="media/out_tobolsk.jpg" alt="Tobolsk">
+
+    <h2>Large Photos</h2>
+    <img src="media/out_emir.jpg" alt="Emir">
+    <img src="media/out_harvesters.jpg" alt="Harvesters">
+    <img src="media/out_icon.jpg" alt="Icon">
+    <img src="media/out_lady.jpg" alt="Lady">
+    <img src="media/out_melons.jpg" alt="Melons">
+    <img src="media/out_onion_church.jpg" alt="Onion Church">
+    <img src="media/out_sculpture.jpg" alt="Sculpture">
+    <img src="media/out_self_portrait.jpg" alt="Self Portrait">
+    <img src="media/out_three_generations.jpg" alt="Three Generations">
+    <img src="media/out_train.jpg" alt="Train">
+
+    <img src="media/out_elective-cathedral.jpg" alt="Inside Cathedral">
+    <img src="media/out_elective-table.jpg" alt="Table">
+    <img src="media/out_elective-tomb.jpg" alt="Tomb">
 </body>
 
 </html>
