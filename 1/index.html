@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Project 1: Colorizing the Prokudin-Gorskii photo collection</h1>
+    
+    <p>The Prokudin-Gorskii collection consists of thousands of photos that capture Russia in the early 20th century. 
+        Each photo in the collection is actually three snapshots that separately capture red, green, and blue light. 
+        This project uses code to align the three snapshots, producing a color version of the original photo.
+    </p>
+    <p> 
+        The pixel-by-pixel cross-correlation between two snapshots approximates their similarity. 
+        To find the best alignment of two snapshots, we displace one snapshot by varied horizontal and vertical pixel amounts. 
+        For smaller snapshots, brute-force displacement is fast enough. 
+        For larger snapshots, we employ a "pyramid" approach: an approximate alignment is found for very small versions of the snapshots, and the alignment is refined on successively larger versions.
+    </p>
+        The cross-correlation metric suffices for most photos in the collection. 
+        However, in some photos the snapshots differ heavily (e.g. because a large object in the photo is overwhelmingly blue). For these photos, cross-correlation may not accurately measure similarity. 
+
+        To combat this, we calculate the pixel-by-pixel gradient of each snapshot, yielding "edge-strength" snapshots. 
+        The cross-correlation metric works better on edge-strength snapshots than the originals because snapshots of the same photo almost always depict edges similarly even when they depict brightness differently.
+    </p>
+    <p>
+        Our other optimization is to only consider the center portion of each edge-strength snapshot when calculating the cross-correlation metric. 
+        This prevents the artifacts on the edge of each snapshot from influencing the metric. 
+    </p>
+</body>
+</html>
