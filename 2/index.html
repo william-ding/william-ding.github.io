@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Project 2: Fun with Filters and Frequencies!</h1>
+
+        <h3>Partial derivatives and gradient magnitude</h3>
+        <img src="media/data/cameraman.png" alt="img" width=auto height="400">
+        <img src="media/out/cam/d_dc.png" alt="img" width=auto height="400">
+        <img src="media/out/cam/d_dr.png" alt="img" width=auto height="400">
+        <img src="media/out/cam/grad_mag.png" alt="img" width=auto height="400">
+        <img src="media/out/cam/grad_mag_0.1.png" alt="img" width=auto height="400">
+
+        <h3>Improving results with Gaussian smoothing!</h3>
+        <img src="media/out/cam_smooth/d_dc.png" alt="img" width=auto height="400">
+        <img src="media/out/cam_smooth/d_dr.png" alt="img" width=auto height="400">
+        <img src="media/out/cam_smooth/grad_mag.png" alt="img" width=auto height="400">
+        <img src="media/out/cam_smooth/grad_mag_0.1.png" alt="img" width=auto height="400">
+
+        <h3>Two filters can become one!</h3>
+        <img src="media/out/cam_smooth/d_dc_smooth_fil.png" alt="img" width=auto height="400">
+        <img src="media/out/cam_smooth/d_dr_smooth_fil.png" alt="img" width=auto height="400">
+        <img src="media/out/cam_smooth/d_dc_combined.png" alt="img" width=auto height="400">
+        <img src="media/out/cam_smooth/d_dr_combined.png" alt="img" width=auto height="400">
+
+    <p>
+        The pixel-by-pixel cross-correlation between two snapshots approximates their similarity.
+        To find the best alignment of two snapshots, we displace one snapshot by varied horizontal and vertical pixel
+        amounts.
+        For smaller snapshots, brute-force displacement is fast enough.
+        For larger snapshots, we employ a "pyramid" approach: an approximate alignment is found for very small versions
+        of the snapshots, and the alignment is refined on successively larger versions.
+    </p>
+        The cross-correlation metric suffices for most photos in the collection.
+        However, in some photos the snapshots differ heavily (e.g. because a large object in the photo is overwhelmingly
+        blue). For these photos, cross-correlation may not accurately measure similarity.
+
+        To combat this, we calculate the pixel-by-pixel gradient of each snapshot, yielding "edge-strength" snapshots.
+        The cross-correlation metric works better on edge-strength snapshots than on the originals because snapshots from
+        the same photo almost always display edges similarly even when they display brightness differently.
+    </p>
+    <p>
+        Our other optimization is to only consider the center portion of each edge-strength snapshot when calculating
+        the cross-correlation metric.
+        This prevents the artifacts on the edge of each snapshot from influencing the metric.
+    </p>
+
+    <h2>Comparison: original snapshots vs. edge-strength snapshots</h2>
+    <img src="media/out_emir_naive.jpg" alt="Emir" width="600" height=auto>
+    <img src="media/out_emir.jpg" alt="Emir" width="600" height=auto>
+
+    <p>Left: cross-correlation applied to original snapshots. Right: cross-correlation applied to edge-strength snapshots.</p>
+
+    <h2>Small photos</h2>
+    <img src="media/out_cathedral.jpg" alt="Cathedral" width="300" height=auto>
+    <img src="media/out_monastery.jpg" alt="Monastery" width="300" height=auto>
+    <img src="media/out_tobolsk.jpg" alt="Tobolsk" width="300" height=auto>
+
+    <h2>Large photos</h2>
+    <img src="media/out_church.jpg" alt="Church" width="600" height=auto>
+    <img src="media/out_harvesters.jpg" alt="Harvesters" width="600" height=auto>
+    <img src="media/out_icon.jpg" alt="Icon" width="600" height=auto>
+    <img src="media/out_lady.jpg" alt="Lady" width="600" height=auto>
+    <img src="media/out_melons.jpg" alt="Melons" width="600" height=auto>
+    <img src="media/out_onion_church.jpg" alt="Onion Church" width="600" height=auto>
+    <img src="media/out_sculpture.jpg" alt="Sculpture" width="600" height=auto>
+    <img src="media/out_self_portrait.jpg" alt="Self Portrait" width="600" height=auto>
+    <img src="media/out_three_generations.jpg" alt="Three Generations" width="600" height=auto>
+    <img src="media/out_train.jpg" alt="Train" width="600" height=auto>
+
+    <img src="media/out_elective-cathedral.jpg" alt="Inside Cathedral" width="600" height=auto>
+    <img src="media/out_elective-table.jpg" alt="Table" width="600" height=auto>
+    <img src="media/out_elective-tomb.jpg" alt="Tomb" width="600" height=auto>
+</body>
+
+</html>
