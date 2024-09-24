@@ -32,11 +32,15 @@
         <img src="media/out/cam/grad_mag.png" alt="img" width=auto height="400">
         <img src="media/out/cam/grad_mag_0.1.png" alt="img" width=auto height="400">
 
+        <p>[A cameraman (cameraman.png); the derivative of cameraman.png w.r.t x; the derivative of cameraman.png w.r.t y; the gradient magnitude of cameraman.png; the gradient magnitude of camerman.png binarized with a threshold of 0.1.] We can use basic convolutional operations to obtain the partial derivatives (and subsequently the gradient) of an image.</p>
+
         <h3>Improving results with Gaussian smoothing!</h3>
         <img src="media/out/cam_smooth/d_dc.png" alt="img" width=auto height="400">
         <img src="media/out/cam_smooth/d_dr.png" alt="img" width=auto height="400">
         <img src="media/out/cam_smooth/grad_mag.png" alt="img" width=auto height="400">
         <img src="media/out/cam_smooth/grad_mag_0.1.png" alt="img" width=auto height="400">
+
+        <p>[Improved versions of the previous images.] We can apply a Gaussian smoothing filter to cameraman.png. This replaces each pixel with a weighted average of its neighbording pixels. By smoothing the original image, we ensure that later operations are not disrupted by pixel-to-pixel noise. In particular, the binarized magnitude, which identifies the edges of an image, captures much less noise when applied to the smoothed version of cameraman.png.</p>
 
         <h3>Two filters can become one!</h3>
         <img src="media/out/cam_smooth/d_dc_smooth_fil.png" alt="img" width=auto height="400">
@@ -44,10 +48,12 @@
         <img src="media/out/cam_smooth/d_dc_combined.png" alt="img" width=auto height="400">
         <img src="media/out/cam_smooth/d_dr_combined.png" alt="img" width=auto height="400">
 
+        <p> [The D_x filter combined with Gaussian smoothing; the D_y filter combined with Gaussian smoothing; the results of applying these combined filters.] We can combine filters before applying them to an image. This ensures large images receive only one convolutional operation and saves runtime. Note that combining filters before applying them does not change the final result.</p>
+
     <h2>Image sharpening</h2>
 
     <img src="media/data/taj.png" alt="img" width=auto height="400">
-    <img src="media/out/sharpen/cameraman.png" alt="img" width=auto height="400">
+    <img src="media/out/sharpen/taj.jpg" alt="img" width=auto height="400">
 
     <img src="media/data/overleaf.jpg" alt="img" width=auto height="400">
     <img src="media/out/sharpen/overleaf.jpg" alt="img" width=auto height="400">
@@ -95,39 +101,3 @@
     <img src="media/data/rose.jpg" alt="img" width=auto height="400">
     <img src="media/data/duck.jpg" alt="img" width=auto height="400">
     <img src="media/out/splice/forehead.jpg" alt="img" width=auto height="400">
-
-
-
-
-
-
-
-    <h2>Comparison: original snapshots vs. edge-strength snapshots</h2>
-    <img src="media/out_emir_naive.jpg" alt="Emir" width="600" height=auto>
-    <img src="media/out_emir.jpg" alt="Emir" width="600" height=auto>
-
-    <p>Left: cross-correlation applied to original snapshots. Right: cross-correlation applied to edge-strength snapshots.</p>
-
-    <h2>Small photos</h2>
-    <img src="media/out_cathedral.jpg" alt="Cathedral" width="300" height=auto>
-    <img src="media/out_monastery.jpg" alt="Monastery" width="300" height=auto>
-    <img src="media/out_tobolsk.jpg" alt="Tobolsk" width="300" height=auto>
-
-    <h2>Large photos</h2>
-    <img src="media/out_church.jpg" alt="Church" width="600" height=auto>
-    <img src="media/out_harvesters.jpg" alt="Harvesters" width="600" height=auto>
-    <img src="media/out_icon.jpg" alt="Icon" width="600" height=auto>
-    <img src="media/out_lady.jpg" alt="Lady" width="600" height=auto>
-    <img src="media/out_melons.jpg" alt="Melons" width="600" height=auto>
-    <img src="media/out_onion_church.jpg" alt="Onion Church" width="600" height=auto>
-    <img src="media/out_sculpture.jpg" alt="Sculpture" width="600" height=auto>
-    <img src="media/out_self_portrait.jpg" alt="Self Portrait" width="600" height=auto>
-    <img src="media/out_three_generations.jpg" alt="Three Generations" width="600" height=auto>
-    <img src="media/out_train.jpg" alt="Train" width="600" height=auto>
-
-    <img src="media/out_elective-cathedral.jpg" alt="Inside Cathedral" width="600" height=auto>
-    <img src="media/out_elective-table.jpg" alt="Table" width="600" height=auto>
-    <img src="media/out_elective-tomb.jpg" alt="Tomb" width="600" height=auto>
-</body>
-
-</html>
