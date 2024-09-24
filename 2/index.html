@@ -8,12 +8,23 @@
             font-family: Arial, sans-serif;
             margin: 20px;
         }
+        /* From https://css-tricks.com/almanac/properties/i/image-rendering/
+        */
+        img {
+            image-rendering: auto;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+
+            /* Safari seems to support, but seems deprecated and does the same thing as the others. */
+            image-rendering: -webkit-optimize-contrast;
+        }
     </style>
 </head>
 
 <body>
     <h1>Project 2: Fun with Filters and Frequencies!</h1>
 
+    <h2>Fun with Filters</h2>
         <h3>Partial derivatives and gradient magnitude</h3>
         <img src="media/data/cameraman.png" alt="img" width=auto height="400">
         <img src="media/out/cam/d_dc.png" alt="img" width=auto height="400">
@@ -33,27 +44,18 @@
         <img src="media/out/cam_smooth/d_dc_combined.png" alt="img" width=auto height="400">
         <img src="media/out/cam_smooth/d_dr_combined.png" alt="img" width=auto height="400">
 
-    <p>
-        The pixel-by-pixel cross-correlation between two snapshots approximates their similarity.
-        To find the best alignment of two snapshots, we displace one snapshot by varied horizontal and vertical pixel
-        amounts.
-        For smaller snapshots, brute-force displacement is fast enough.
-        For larger snapshots, we employ a "pyramid" approach: an approximate alignment is found for very small versions
-        of the snapshots, and the alignment is refined on successively larger versions.
-    </p>
-        The cross-correlation metric suffices for most photos in the collection.
-        However, in some photos the snapshots differ heavily (e.g. because a large object in the photo is overwhelmingly
-        blue). For these photos, cross-correlation may not accurately measure similarity.
+    <h2>Image Sharpening</h2>
 
-        To combat this, we calculate the pixel-by-pixel gradient of each snapshot, yielding "edge-strength" snapshots.
-        The cross-correlation metric works better on edge-strength snapshots than on the originals because snapshots from
-        the same photo almost always display edges similarly even when they display brightness differently.
-    </p>
-    <p>
-        Our other optimization is to only consider the center portion of each edge-strength snapshot when calculating
-        the cross-correlation metric.
-        This prevents the artifacts on the edge of each snapshot from influencing the metric.
-    </p>
+
+
+
+
+
+
+
+
+
+
 
     <h2>Comparison: original snapshots vs. edge-strength snapshots</h2>
     <img src="media/out_emir_naive.jpg" alt="Emir" width="600" height=auto>
