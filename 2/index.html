@@ -54,9 +54,10 @@
 
     <img src="media/data/taj.png" alt="img" width=auto height="400">
     <img src="media/out/sharpen/taj.jpg" alt="img" width=auto height="400">
-
     <img src="media/data/overleaf.jpg" alt="img" width=auto height="400">
     <img src="media/out/sharpen/overleaf.jpg" alt="img" width=auto height="400">
+
+    <p>[The Taj Mahal (taj.png); a sharpened version of taj.png; an Overleaf ducky (overleaf.jpg); a sharpened version of overleaf.jpg. Also, Linux's Tux (tux.jpg); a Gaussian-smoothed version of tux.jpg; a sharpened version of the smoothed tux.jpg.] We can obtain the high frequencies of an image (i.e. the parts of the image with abrupt pixel-to-pixel changes) by subtracting a smoothed version of the image from the original. From the smoothening and subsequent sharpening of tux.jpg, we can see that sharpening is essentially the inverse of smoothing, which makes mathematical sense: the Gaussian smoothing is first added to tux.jpg and then subtracted away.</p>
     <img src="media/data/tux.jpg" alt="img" width=auto height="400">
     <img src="media/out/sharpen/smooth_tux.jpg" alt="img" width=auto height="400">
     <img src="media/out/sharpen/sharp_tux.jpg" alt="img" width=auto height="400">
@@ -70,11 +71,15 @@
     <img src="media/out/hybrid/filtered_sol.jpg" alt="img" width=auto height="400">
     <img src="media/out/hybrid/ks.jpg" alt="img" width=auto height="400">
 
+    <p>[A Ky Kiske plush (ky.jpg); a low-frequency version of ky.jpg; a Sol Badguy plush (sol.jpg); a high-frequency version of sol.jpg; a "hybrid image" combining ky.jpg and sol.jpg.] From close up, the high-frequency parts of an image dominate; from far away, the low-frequency parts dominate. By adding the low-frequency version of one image to the high-frequency version of another, we obtain a hybrid image that looks different at different distances.</p>
+
     <img src="media/out/hybrid/lmft_ky.jpg" alt="img" width=auto height="400">
     <img src="media/out/hybrid/lmft_sol.jpg" alt="img" width=auto height="400">
     <img src="media/out/hybrid/lmft_filtered_ky.jpg" alt="img" width=auto height="400">
     <img src="media/out/hybrid/lmft_filtered_sol.jpg" alt="img" width=auto height="400">
     <img src="media/out/hybrid/lmft_ks.jpg" alt="img" width=auto height="400">
+
+    <p>[The log-magnitude Fourier transforms of the original images, followed by the filtered images, followed by the hybrid image.]</p>
 
     <h3>More hybrid images!</h3>
     <img src="media/data/DerekPicture.jpg" alt="img" width=auto height="400">
@@ -88,6 +93,8 @@
     <img src="media/data/gg.jpg" alt="img" width=auto height="400">
     <img src="media/data/bb.jpg" alt="img" width=auto height="400">
     <img src="media/out/hybrid/gb.jpg" alt="img" width=auto height="400">
+
+    <p>[More hybrid images with their inputs.] The last hybrid image, which combines the Golden Gate bridge and the Bay bridge, is somewhat poor because the bridges overlap poorly and the relative darkness of the Golden Gate overpowers the rest of the image.</p>
 
     <h2>Splicing</h2>
     <img src="media/data/apple.jpeg" alt="img" width=auto height="400">
