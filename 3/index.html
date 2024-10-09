@@ -34,14 +34,14 @@
     <img src="media/out/gif/will_tri.jpg" alt="img" width=auto height="400">
     <img src="media/out/gif/george_tri.jpg" alt="img" width=auto height="400">
     <p>[Triangulations of the two photos.]</p>
-    <p>We apply "Delaunay triangulation." This algorithm uses our chosen points to split each photo into triangles.</p>
+    <p>We apply the "Delaunay triangulation" algorithms, which uses our chosen points to split each photo into triangles.</p>
 
     <img src="media/data/will_small.jpg" alt="img" width=auto height="400">
     <img src="media/out/gif/morph_22.jpg" alt="img" width=auto height="400">
     <img src="media/data/george_small.jpg" alt="img" width=auto height="400">
     <p>[The original photo of me; a "halfway" morph; the original photo of George Clooney.]</p>
     <p>Computing a morph consists of two parts. First, we average the shapes of the two faces by taking a weighted average of their triangulations (with a weight <code>w</code> for the first triangulation and weight <code>1-w</code> for the second). Then, we fill each triangle in the averaged triangulation with the colors of the corresponding triangles in the original photos.</p>
-    <p>A pressing issue is that a triangle <code>t_m</code> in the averaged triangulation may not line up exactly with either of its corresponding triangles <code>t_a</code>, <code>t_b</code> in the original photos. We solve this issue with affine transformation. Given the three points of <code>t_m</code> and the three points of <code>t_a</code>, we compute an affine transformation matrix from <code>t_m</code> to <code>t_a</code>. Then, for each pixel in <code>t_m</code>, we use the matrix to find the corresponding location in <code>t_a</code>.</p>
+    <p>One pressing issue is that a triangle <code>t_m</code> in the averaged triangulation may not line up exactly with either of its corresponding triangles <code>t_a</code>, <code>t_b</code> in the original photos. We solve this issue with affine transformation. Given the three points of <code>t_m</code> and the three points of <code>t_a</code>, we compute an affine transformation matrix from <code>t_m</code> to <code>t_a</code>. Then, for each pixel in <code>t_m</code>, we use the matrix to find the corresponding location in <code>t_a</code>.</p>
     <p>A computed location in <code>t_a</code> may have non-integer coordinates, so we use an interpolation function to sample the colors of its surrounding pixels. Then we add these colors (with weight <code>w</code>) to the corresponding pixel in <code>t_m</code>. By iterating over each triangle in the averaged triangulation and each pixel in a triangle, we compute the entire contribution of the first original photo to the morph. Separately, we compute the entire contribution of the second original photo. Combining their contributions produces the finished morph.</p>
 
     <img src="media/out/gif/george_to_will.gif" alt="img" width=auto height="400">
