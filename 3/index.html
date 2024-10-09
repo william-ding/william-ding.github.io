@@ -57,7 +57,7 @@
             <img src="media/out/danes/average_male.jpg" alt="img" width=auto height="250">
             <p>[Three photos from the IMM Face Database; the average of thirty photos.]</p>
             
-            <p>We can generalize the morph computation to accomodate more than two original photos. Above is the result of averaging the faces of thirty Danish males taken from the IMM Face Database. Each photo is given equal weight when computing the shape and color of the average face.</p>
+            <p>We can generalize the morph computation to accomodate more than two original photos. Above is the result of averaging the faces of thirty Danish males from the IMM Face Database. Each photo is pre-annotated with 58 points, and each photo is given equal weight when computing the shape and color of the average face.</p>
 
             <img src="media/out/danes/averageshape/average_shape_male0.jpg" alt="img" width=auto height="250">
             <img src="media/out/danes/averageshape/average_shape_male1.jpg" alt="img" width=auto height="250">
@@ -69,10 +69,27 @@
             <img src="media/out/danes/avg_face_will_shape.jpg" alt="img" width=auto height="250">
             <img src="media/out/danes/will_cari.jpg" alt="img" width=auto height="250">
             <p>[The average Danish male face shape with the colors of my photo; my face shape with the colors of the average Danish male face; my face exaggerated to contrast the shape and colors of the average Danish male face.]</p>
-            <p>I also combined my photo with the photos from the database.</p> 
+            <p>I also combined my photo with the photos from the database. This required a second annotation of my face that matched the 58-point format of the Danish male faces.</p> 
             <p>In the morph computation for the third image above, the shape and colors of my face have a weight of <code>1.9</code>, and the shapes and colors of the Danish male faces have a combined weight of <code>-0.9</code>. The Danish male faces contribute negatively, so in the resulting image I appear <i>less</i> like them than in my original photo.</p>
 
         <h2>The PCA alternative</h2>
+
+                <img src="media/out/danes/pca/male0pcshape0.jpg" alt="img" width=auto height="250">
+                <img src="media/out/danes/pca/male0pcshape1.jpg" alt="img" width=auto height="250">
+                <img src="media/out/danes/pca/male0pcshape2.jpg" alt="img" width=auto height="250">
+                <p>The first Danish male with an increased contribution of the first principal component of face shapes; the second p.c.; the third p.c.</p>
+                <img src="media/out/danes/will_cari.jpg" alt="img" width=auto height="250">
+                <img src="media/out/danes/pca/male1pcshape0.jpg" alt="img" width=auto height="250">
+                <img src="media/out/danes/pca/male1pcshape1.jpg" alt="img" width=auto height="250">
+                <img src="media/out/danes/pca/male1pcshape2.jpg" alt="img" width=auto height="250">
+                <img src="media/out/danes/pca/male2pcshape0.jpg" alt="img" width=auto height="250">
+                <img src="media/out/danes/pca/male2pcshape1.jpg" alt="img" width=auto height="250">
+                <img src="media/out/danes/pca/male2pcshape2.jpg" alt="img" width=auto height="250">
+                <p>More results of increasing the contributions of particular principal components.</p>
+                <p>PCA calculates the "principal components" of a dataset. Each datapoint in a dataset is approximated by a linear combination of the most significant principal components of the dataset.</p>
+                <p>In this project, we use PCA to calculate the five most significant principal components of the set of Danish male face shapes. Each face shape is treated as a datapoint with <code>58*2=116</code> features.</p>
+                <p>We change an individual's face shape by increasing the contributions of certain principal components to the individual's face shape and proportionally decreasing the contributions of the other principal components. This produces a morph similar to some of the earlier morphs.</p>
+                <p>Because the computed principal components have no inherent meaning, it is hard to use them to produce a particular morphing effect. This is in contrast to earlier morphs, which had more direct explanations.</p>
 
 
 <!--
