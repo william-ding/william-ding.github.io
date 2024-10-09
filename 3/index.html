@@ -48,16 +48,20 @@
     <p>[The final morphing GIF.]</p>
     <p>We can compute many morphs (in this case, 46 of them) with varying values of <code>w</code>. Displaying the morphs in sequence creates the appearance of a continuous morphing process.</p>
 
-    <h2>Morphing with a dataset</h2>
+    <h2>Dataset morphing</h2>
 
-    <img src="media/data/danes/01-1m.bmp" alt="img" width=auto height="400">
-    <img src="media/data/danes/05-1m.bmp" alt="img" width=auto height="400">
-    <img src="media/data/danes/06-1m.bmp" alt="img" width=auto height="400">
-    <img src="media/out/danes/average_male.jpg" alt="img" width=auto height="400">
-    <img src="media/out/danes/average_male.jpg" alt="img" width=auto height="400">
+    <img src="media/data/danes/01-1m.bmp" alt="img" width=auto height="200">
+    <img src="media/data/danes/05-1m.bmp" alt="img" width=auto height="200">
+    <img src="media/data/danes/06-1m.bmp" alt="img" width=auto height="200">
+    <img src="media/out/danes/average_male.jpg" alt="img" width=auto height="200">
     <p>[Three photos from the IMM Face Database; the average of thirty photos.]</p>
     
-    <p>We can generalize the morph computation to accomodate more than two original photos. Above is the result of averaging faces of thirty Danish males, taken from the IMM Face Database. Each face is given equal weight when computing the shape and color of the average face.</p>
+    <p>We can generalize the morph computation to accomodate more than two original photos. Above is the result of averaging the faces of thirty Danish males taken from the IMM Face Database. Each photo is given equal weight when computing the shape and color of the average face.</p>
+
+    <img src="media/out/danes/averageshape/average_shape_male0.jpg" alt="img" width=auto height="200">
+    <img src="media/out/danes/averageshape/average_shape_male1.jpg" alt="img" width=auto height="200">
+    <img src="media/out/danes/averageshape/average_shape_male2.jpg" alt="img" width=auto height="200">
+    <p>We can also separate the weights for averaging shapes from the weights for averaging colors. The morphs above average the face shapes of the thirty Danish males and use a single photo each for the coloring process.</p>
 
 <!--
     <h1>Project 2: Fun with Filters and Frequencies!</h1>
