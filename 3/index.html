@@ -24,50 +24,56 @@
 <body>
 
     <h1>Project 3: Face Morphing</h1>
-    <h2>A morphing GIF</h2>
 
-    <img src="media/out/gif/will_points.jpg" alt="img" width=auto height="400">
-    <img src="media/out/gif/george_points.jpg" alt="img" width=auto height="400">
-    <p>[An annotated photo of me; an annotated photo of George Clooney, by Martin Schoeller.]
-    <p> Face morphing begins with a manual annotation process. These photos have over a hundred pairs of matching points that mark each face's defining features.</p>
+        <h2>A morphing GIF</h2>
 
-    <img src="media/out/gif/will_tri.jpg" alt="img" width=auto height="400">
-    <img src="media/out/gif/george_tri.jpg" alt="img" width=auto height="400">
-    <p>[Triangulations of the two photos.]</p>
-    <p>We apply the "Delaunay triangulation" algorithm, which uses our chosen points to split each photo into triangles.</p>
+            <img src="media/out/gif/will_points.jpg" alt="img" width=auto height="400">
+            <img src="media/out/gif/george_points.jpg" alt="img" width=auto height="400">
+            <p>[An annotated photo of me; an annotated photo of George Clooney, by Martin Schoeller.]
+            <p> Face morphing begins with a manual annotation process. These photos have over a hundred pairs of matching points that mark each face's defining features.</p>
 
-    <img src="media/data/will_small.jpg" alt="img" width=auto height="400">
-    <img src="media/out/gif/morph_22.jpg" alt="img" width=auto height="400">
-    <img src="media/data/george_small.jpg" alt="img" width=auto height="400">
-    <p>[The original photo of me; a "halfway" morph; the original photo of George Clooney.]</p>
-    <p>Computing a morph consists of two parts. First, we average the shapes of the two faces by taking a weighted average of their triangulations (with weight <code>w</code> for the first triangulation and weight <code>1-w</code> for the second). Then, we fill each triangle in the averaged triangulation with the colors of the corresponding triangles in the original photos.</p>
-    <p>One pressing issue is that a triangle <code>t_m</code> in the averaged triangulation may not line up exactly with either of its corresponding triangles <code>t_a</code>, <code>t_b</code> in the original photos. We solve this issue with affine transformation. Given the three points of <code>t_m</code> and the three points of <code>t_a</code>, we compute an affine transformation matrix from <code>t_m</code> to <code>t_a</code>. Then, for each pixel in <code>t_m</code>, we use the matrix to find the corresponding location in <code>t_a</code>.</p>
-    <p>A computed location in <code>t_a</code> may have non-integer coordinates, so we use an interpolation function to sample the colors of its surrounding pixels. Then we add these colors to the corresponding pixel in <code>t_m</code>. By iterating over each triangle in the averaged triangulation and each pixel in a triangle, we compute the entire contribution of the first original photo to the morph. Separately, we compute the entire contribution of the second original photo. Combining their contributions with the appropriate weights produces the finished morph.</p>
+            <img src="media/out/gif/will_tri.jpg" alt="img" width=auto height="400">
+            <img src="media/out/gif/george_tri.jpg" alt="img" width=auto height="400">
+            <p>[Triangulations of the two photos.]</p>
+            <p>We apply the "Delaunay triangulation" algorithm, which uses our chosen points to split each photo into triangles.</p>
 
-    <img src="media/out/gif/george_to_will.gif" alt="img" width=auto height="400">
-    <p>[The final morphing GIF.]</p>
-    <p>We can compute many morphs (in this case, 46 of them) with varying values of <code>w</code>. Displaying the morphs in sequence creates the appearance of a continuous morphing process.</p>
+            <img src="media/data/will_small.jpg" alt="img" width=auto height="400">
+            <img src="media/out/gif/morph_22.jpg" alt="img" width=auto height="400">
+            <img src="media/data/george_small.jpg" alt="img" width=auto height="400">
+            <p>[The original photo of me; a "halfway" morph; the original photo of George Clooney.]</p>
+            <p>Computing a morph consists of two parts. First, we average the shapes of the two faces by taking a weighted average of their triangulations (with weight <code>w</code> for the first triangulation and weight <code>1-w</code> for the second). Then, we fill each triangle in the averaged triangulation with the colors of the corresponding triangles in the original photos.</p>
+            <p>One pressing issue is that a triangle <code>t_m</code> in the averaged triangulation may not line up exactly with either of its corresponding triangles <code>t_a</code>, <code>t_b</code> in the original photos. We solve this issue with affine transformation. Given the three points of <code>t_m</code> and the three points of <code>t_a</code>, we compute an affine transformation matrix from <code>t_m</code> to <code>t_a</code>. Then, for each pixel in <code>t_m</code>, we use the matrix to find the corresponding location in <code>t_a</code>.</p>
+            <p>A computed location in <code>t_a</code> may have non-integer coordinates, so we use an interpolation function to sample the colors of its surrounding pixels. Then we add these colors to the corresponding pixel in <code>t_m</code>. By iterating over each triangle in the averaged triangulation and each pixel in a triangle, we compute the entire contribution of the first original photo to the morph. Separately, we compute the entire contribution of the second original photo. Combining their contributions with the appropriate weights produces the finished morph.</p>
 
-    <h2>Dataset morphing</h2>
+            <img src="media/out/gif/george_to_will.gif" alt="img" width=auto height="400">
+            <p>[The final morphing GIF.]</p>
+            <p>We can compute many morphs (in this case, 46 of them) with varying values of <code>w</code>. Displaying the morphs in sequence creates the appearance of a continuous morphing process.</p>
 
-    <img src="media/data/danes/01-1m.bmp" alt="img" width=auto height="250">
-    <img src="media/data/danes/05-1m.bmp" alt="img" width=auto height="250">
-    <img src="media/data/danes/06-1m.bmp" alt="img" width=auto height="250">
-    <img src="media/out/danes/average_male.jpg" alt="img" width=auto height="250">
-    <p>[Three photos from the IMM Face Database; the average of thirty photos.]</p>
-    
-    <p>We can generalize the morph computation to accomodate more than two original photos. Above is the result of averaging the faces of thirty Danish males taken from the IMM Face Database. Each photo is given equal weight when computing the shape and color of the average face.</p>
+        <h2>Dataset morphing</h2>
 
-    <img src="media/out/danes/averageshape/average_shape_male0.jpg" alt="img" width=auto height="250">
-    <img src="media/out/danes/averageshape/average_shape_male1.jpg" alt="img" width=auto height="250">
-    <img src="media/out/danes/averageshape/average_shape_male2.jpg" alt="img" width=auto height="250">
-    <p>[The same three photos from the database, manipulated to have the same face shape.]</p>
-    <p>We can also separate the weights for averaging shapes from the weights for averaging colors. The morphs above average the face shapes of the thirty Danish males and use a single photo each for the coloring process.</p>
+        <img src="media/data/danes/01-1m.bmp" alt="img" width=auto height="250">
+        <img src="media/data/danes/05-1m.bmp" alt="img" width=auto height="250">
+        <img src="media/data/danes/06-1m.bmp" alt="img" width=auto height="250">
+        <img src="media/out/danes/average_male.jpg" alt="img" width=auto height="250">
+        <p>[Three photos from the IMM Face Database; the average of thirty photos.]</p>
+        
+        <p>We can generalize the morph computation to accomodate more than two original photos. Above is the result of averaging the faces of thirty Danish males taken from the IMM Face Database. Each photo is given equal weight when computing the shape and color of the average face.</p>
 
-    <img src="media/out/danes/will_face_avg_shape.jpg" alt="img" width=auto height="250">
-    <img src="media/out/danes/avg_face_will_shape.jpg" alt="img" width=auto height="250">
-    <img src="media/out/danes/will_cari.jpg" alt="img" width=auto height="250">
-    <p>[The average Danish male face shape with the colors of my photo; my face shape with the colors of the average Danish male face; my face exaggerated to contrast the shape and colors of the average Danish male face.]</p>
+        <img src="media/out/danes/averageshape/average_shape_male0.jpg" alt="img" width=auto height="250">
+        <img src="media/out/danes/averageshape/average_shape_male1.jpg" alt="img" width=auto height="250">
+        <img src="media/out/danes/averageshape/average_shape_male2.jpg" alt="img" width=auto height="250">
+        <p>[The same three photos from the database, manipulated to have the same face shape.]</p>
+        <p>We can also separate the weights for averaging shapes from the weights for averaging colors. The morphs above average the face shapes of the thirty Danish males and use a single photo each for the coloring process.</p>
+
+        <img src="media/out/danes/will_face_avg_shape.jpg" alt="img" width=auto height="250">
+        <img src="media/out/danes/avg_face_will_shape.jpg" alt="img" width=auto height="250">
+        <img src="media/out/danes/will_cari.jpg" alt="img" width=auto height="250">
+        <p>[The average Danish male face shape with the colors of my photo; my face shape with the colors of the average Danish male face; my face exaggerated to contrast the shape and colors of the average Danish male face.]</p>
+        <p>I also combined my photo with the photos from the database.</p> 
+        <p>In the morph computation for the third image above, the shape and colors of my face have a weight of <code>1.9</code>, and the shapes and colors of the Danish male faces have a combined weight of <code>-0.9</code>. The Danish male faces contribute negatively, so in the resulting image I appear <i>less</i> like them than in my original photo.</p>
+
+    <h2>The PCA alternative</h2>
+
 
 <!--
     <h1>Project 2: Fun with Filters and Frequencies!</h1>
