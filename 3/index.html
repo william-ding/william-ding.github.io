@@ -51,28 +51,28 @@
 
         <h2>Dataset morphing</h2>
 
-        <img src="media/data/danes/01-1m.bmp" alt="img" width=auto height="250">
-        <img src="media/data/danes/05-1m.bmp" alt="img" width=auto height="250">
-        <img src="media/data/danes/06-1m.bmp" alt="img" width=auto height="250">
-        <img src="media/out/danes/average_male.jpg" alt="img" width=auto height="250">
-        <p>[Three photos from the IMM Face Database; the average of thirty photos.]</p>
-        
-        <p>We can generalize the morph computation to accomodate more than two original photos. Above is the result of averaging the faces of thirty Danish males taken from the IMM Face Database. Each photo is given equal weight when computing the shape and color of the average face.</p>
+            <img src="media/data/danes/01-1m.bmp" alt="img" width=auto height="250">
+            <img src="media/data/danes/05-1m.bmp" alt="img" width=auto height="250">
+            <img src="media/data/danes/06-1m.bmp" alt="img" width=auto height="250">
+            <img src="media/out/danes/average_male.jpg" alt="img" width=auto height="250">
+            <p>[Three photos from the IMM Face Database; the average of thirty photos.]</p>
+            
+            <p>We can generalize the morph computation to accomodate more than two original photos. Above is the result of averaging the faces of thirty Danish males taken from the IMM Face Database. Each photo is given equal weight when computing the shape and color of the average face.</p>
 
-        <img src="media/out/danes/averageshape/average_shape_male0.jpg" alt="img" width=auto height="250">
-        <img src="media/out/danes/averageshape/average_shape_male1.jpg" alt="img" width=auto height="250">
-        <img src="media/out/danes/averageshape/average_shape_male2.jpg" alt="img" width=auto height="250">
-        <p>[The same three photos from the database, manipulated to have the same face shape.]</p>
-        <p>We can also separate the weights for averaging shapes from the weights for averaging colors. The morphs above average the face shapes of the thirty Danish males and use a single photo each for the coloring process.</p>
+            <img src="media/out/danes/averageshape/average_shape_male0.jpg" alt="img" width=auto height="250">
+            <img src="media/out/danes/averageshape/average_shape_male1.jpg" alt="img" width=auto height="250">
+            <img src="media/out/danes/averageshape/average_shape_male2.jpg" alt="img" width=auto height="250">
+            <p>[The same three photos from the database, manipulated to have the same face shape.]</p>
+            <p>We can also separate the weights for averaging shapes from the weights for averaging colors. The morphs above average the face shapes of the thirty Danish males and use a single photo each for the coloring process.</p>
 
-        <img src="media/out/danes/will_face_avg_shape.jpg" alt="img" width=auto height="250">
-        <img src="media/out/danes/avg_face_will_shape.jpg" alt="img" width=auto height="250">
-        <img src="media/out/danes/will_cari.jpg" alt="img" width=auto height="250">
-        <p>[The average Danish male face shape with the colors of my photo; my face shape with the colors of the average Danish male face; my face exaggerated to contrast the shape and colors of the average Danish male face.]</p>
-        <p>I also combined my photo with the photos from the database.</p> 
-        <p>In the morph computation for the third image above, the shape and colors of my face have a weight of <code>1.9</code>, and the shapes and colors of the Danish male faces have a combined weight of <code>-0.9</code>. The Danish male faces contribute negatively, so in the resulting image I appear <i>less</i> like them than in my original photo.</p>
+            <img src="media/out/danes/will_face_avg_shape.jpg" alt="img" width=auto height="250">
+            <img src="media/out/danes/avg_face_will_shape.jpg" alt="img" width=auto height="250">
+            <img src="media/out/danes/will_cari.jpg" alt="img" width=auto height="250">
+            <p>[The average Danish male face shape with the colors of my photo; my face shape with the colors of the average Danish male face; my face exaggerated to contrast the shape and colors of the average Danish male face.]</p>
+            <p>I also combined my photo with the photos from the database.</p> 
+            <p>In the morph computation for the third image above, the shape and colors of my face have a weight of <code>1.9</code>, and the shapes and colors of the Danish male faces have a combined weight of <code>-0.9</code>. The Danish male faces contribute negatively, so in the resulting image I appear <i>less</i> like them than in my original photo.</p>
 
-    <h2>The PCA alternative</h2>
+        <h2>The PCA alternative</h2>
 
 
 <!--
