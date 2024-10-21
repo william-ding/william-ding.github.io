@@ -1,4 +1,4 @@
-3/index.html<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -23,7 +23,7 @@
 
 <body>
 
-    <h1>Project 3: Warping and Mosaicing</h1>
+    <h1>Project 4: Warping and Mosaicing</h1>
 
         <h2>Warping</h2>
 
@@ -42,6 +42,6 @@
             <img src="media/out_mosaic.jpg" alt="img" width=auto height="400">
             <p>[The two photos combined as a "mosaic." The original left-half photo has been warped to match the viewpoint of the original right-half photo.]</p>
             
-            <p>I obtained a second homography by labelling matching points in my two photos. This allowed me to warp the left-half photo so that it approximately overlayed the right-half photo. To make the homography more precise, I employed gradient descent over the eight parameters of the homography. (My loss function for gradient descent calculated how different the overlapping portions of the photos were on a per-pixel basis. </p>
+            <p>I obtained a second homography by labelling matching points in my two photos. This allowed me to warp the left-half photo so that it approximately overlayed the right-half photo. To make the homography more precise, I employed gradient descent over the eight parameters of the homography. (My loss function for gradient descent calculated how different the overlapping portions of the photos were on a per-pixel basis.) </p>
             <p>In order to merge the two photos in a visually satisfying way, I used BFS to calculate the Manhattan distance of each pixel in the overlapping region of the photos from the non-overlapping regions. I used these distances to calculate a weighted-average value for each pixel in the overlapping region.</p>
 </body>
