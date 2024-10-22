@@ -34,7 +34,7 @@
             <img src="media/out/rect_door.jpg" alt="img" width=auto height="600">
             <p>[A photo of the door to my house; the same photo, warped so that the door appears rectangular.]</p>
 
-            <p>Given two sets of four points, we can compute a "homography" that captures a projective transformation from one set of points to the other. Additional pairs of points let us compute a least-squares homography that is less sensitive to errors in the placement of individual points.</p>
+            <p>Given two sets of four points, we can compute a "homography" that captures the projective transformation from one set of points to the other. Additional pairs of points let us compute a least-squares homography that is less sensitive to errors in the placement of individual points.</p>
             
             <p>To obtain a "rectification" of an image, we label four points in the image. Then we compute the homography between the labelled points and a rectangle of our choice. Applying the homography to the image produces a warped version of the image in which the region defined by the labelled points appears rectangular.</p>
             <p>For the photo of my desk, I labelled the four corners of the computer monitor and mapped these points to a 16:9 rectangle (the monitor has a 16:9 aspect ratio). For the photo of the door, I labelled the four corners of the doorframe and mapped these points to a 1:2 rectangle.</p>
@@ -42,8 +42,11 @@
         <h2>Mosaicing</h2>
 
             <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
-            <p>[The two photos combined as a "mosaic." The original left-half photo has been warped to match the viewpoint of the original right-half photo.]</p>
+            <p>[Two photos of my desk and bed; a mosaic of the two photos.]</p>
             
-            <p>I obtained a second homography by labelling matching points in my two photos. This allowed me to warp the left-half photo so that it approximately overlayed the right-half photo. To make the homography more precise, I employed gradient descent over the eight parameters of the homography. (My loss function for gradient descent calculated how different the overlapping portions of the photos were on a per-pixel basis.) </p>
-            <p>In order to merge the two photos in a visually satisfying way, I used BFS to calculate the Manhattan distance of each pixel in the overlapping region of the photos from the non-overlapping regions. I used these distances to calculate a weighted-average value for each pixel in the overlapping region.</p>
+            <p>Rather than mapping the labelled points of an image to a rectangle, we can map the labelled points to corresponding points in a second image (that was taken from approximately the same point in space). Applying the resulting homography to the first image warps it to match the perspective of the second image, and combining the warped first image with the original second image produces a seamless "mosaic."</p>
+                
+            <p>A homography defined by hand-picked pairs of corresponding points may be imprecise. To improve the homography, we perform gradient descent over the eight parameters of the homography. (For a particular homography, our gradient-descent loss function computes the per-pixel difference between the warped first image and the original second image.)</p>
+            
+            <p>Once a precise homography is obtained, the resulting warped first image and original second image must be combined in a way that prevents visual artifacts. We divide the combined image into three regions: one in which the warped first image is the sole contributor, one in which the original second image is the sole contributor, and one in which both images contribute. For each pixel in the region of overlap, we calculate the Manhattan distance between the pixel and each of the exclusive regions. These distances decide the weights for our weighted-average computation of the RGB values of the pixel in the combined image.</p>
 </body>
