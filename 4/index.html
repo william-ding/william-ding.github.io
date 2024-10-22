@@ -27,19 +27,21 @@
 
         <h2>Warping</h2>
 
-            <img src="media/room_left.jpg" alt="img" width=auto height="400">
-            <img src="media/room_right.jpg" alt="img" width=auto height="400">
-            <p>[Two photos of my desk and bed.]
-            <p> For the first part of this project, I took two photos from the same point in space.</p>
+            <img src="media/data/room_left.jpg" alt="img" width=auto height="400">
+            <img src="media/out/rect_room_left.jpg" alt="img" width=auto height="400">
+            <p>[A photo of my desk; the same photo, warped so that the computer monitor appears rectangular.]</p>
+            <img src="media/data/door.jpg" alt="img" width=auto height="400">
+            <img src="media/out/rect_door.jpg" alt="img" width=auto height="600">
+            <p>[A photo of my door of my house; the same photo, warped so that the door appears rectangular.]</p>
 
+            <p>Given two sets of four points, we can compute a "homography" that captures a projective transformation from one set of points to the other. Additional pairs of points let us compute a least-squares homography that is less sensitive to errors in the placement of individual points.</p>
             
-            <img src="media/out_rect.jpg" alt="img" width=auto height="400">
-            <p>[The first photo, warped so that the computer monitor is perfectly rectangular.]
-            <p>I wrote a function that calculates a least-squares "homography," which captures a projective transformation. For the first photo, I labelled the four points of the computer monitor. Then I mapped these points to a perfect 16:9 rectangle and applied the resulting homography to the photo.</p>
+            <p>We obtain a "rectification" of an image, we label four points in the image. Then we compute the homography between the labelled points and a rectangle of our choice. Applying the homography to the image produces a warped version of the image in which the region defined by the labelled points appears rectangular.</p>
+            <p>For the photo of my desk, I labelled the four corners of the computer monitor and mapped these points to a 16:9 rectangle (the monitor has a 16:9 aspect ratio). For the photo of the door, I labelled the four corners of the doorframe and mapped these points to a 1:2 rectangle.</p>
         
         <h2>Mosaicing</h2>
 
-            <img src="media/out_mosaic.jpg" alt="img" width=auto height="400">
+            <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
             <p>[The two photos combined as a "mosaic." The original left-half photo has been warped to match the viewpoint of the original right-half photo.]</p>
             
             <p>I obtained a second homography by labelling matching points in my two photos. This allowed me to warp the left-half photo so that it approximately overlayed the right-half photo. To make the homography more precise, I employed gradient descent over the eight parameters of the homography. (My loss function for gradient descent calculated how different the overlapping portions of the photos were on a per-pixel basis.) </p>
