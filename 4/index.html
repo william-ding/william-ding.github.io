@@ -32,11 +32,11 @@
             <p>[A photo of my desk; the same photo, warped so that the computer monitor appears rectangular.]</p>
             <img src="media/data/door.jpg" alt="img" width=auto height="400">
             <img src="media/out/rect_door.jpg" alt="img" width=auto height="600">
-            <p>[A photo of my door of my house; the same photo, warped so that the door appears rectangular.]</p>
+            <p>[A photo of the door to my house; the same photo, warped so that the door appears rectangular.]</p>
 
             <p>Given two sets of four points, we can compute a "homography" that captures a projective transformation from one set of points to the other. Additional pairs of points let us compute a least-squares homography that is less sensitive to errors in the placement of individual points.</p>
             
-            <p>We obtain a "rectification" of an image, we label four points in the image. Then we compute the homography between the labelled points and a rectangle of our choice. Applying the homography to the image produces a warped version of the image in which the region defined by the labelled points appears rectangular.</p>
+            <p>To obtain a "rectification" of an image, we label four points in the image. Then we compute the homography between the labelled points and a rectangle of our choice. Applying the homography to the image produces a warped version of the image in which the region defined by the labelled points appears rectangular.</p>
             <p>For the photo of my desk, I labelled the four corners of the computer monitor and mapped these points to a 16:9 rectangle (the monitor has a 16:9 aspect ratio). For the photo of the door, I labelled the four corners of the doorframe and mapped these points to a 1:2 rectangle.</p>
         
         <h2>Mosaicing</h2>
