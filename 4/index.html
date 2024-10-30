@@ -33,14 +33,14 @@
 
                 <p>To obtain a "rectification" of an image, we label four points in the image. Then we compute the homography between the labelled points and a rectangle of our choice. Applying the homography to the image produces a warped version of the image in which the region defined by the labelled points appears rectangular.</p>
             
-                <img src="media/data/room_left.jpg" alt="img" width=auto height="300">
-                <img src="media/out/labels_rect_room_left.jpg" alt="img" width=auto height="300">
-                <img src="media/out/rect_room_left.jpg" alt="img" width=auto height="300">
+                <img src="media/data/room_left.jpg" alt="img" width="auto" height="300">
+                <img src="media/out/labels_rect_room_left.jpg" alt="img" width="auto" height="300">
+                <img src="media/out/rect_room_left.jpg" alt="img" width="auto" height="300">
                 <p>[A photo of my desk <code>(room_left.jpg)</code>; with labels; warped so that the computer monitor appears rectangular.]</p>
 
-                <img src="media/data/door.jpg" alt="img" width=auto height="300">
-                <img src="media/out/labels_rect_door.jpg" alt="img" width=auto height="300">
-                <img src="media/out/rect_door.jpg" alt="img" width=auto height="450">
+                <img src="media/data/door.jpg" alt="img" width="auto" height="300">
+                <img src="media/out/labels_rect_door.jpg" alt="img" width="auto" height="300">
+                <img src="media/out/rect_door.jpg" alt="img" width="auto" height="450">
                 <p>[A photo of the door to my house <code>(door.jpg)</code>; with labels; warped so that the door appears rectangular.]</p>
 
                 <p>For the photo of my desk, I labelled the four corners of the computer monitor and mapped these points to a 16:9 rectangle (the monitor has a 16:9 aspect ratio). For the photo of the door, I labelled the four corners of the doorframe and mapped these points to a 1:2 rectangle.</p>
@@ -51,29 +51,31 @@
                         
                 <p>A homography defined by hand-picked pairs of corresponding points may be imprecise. To improve the homography, we perform gradient descent over the eight parameters of the homography. (For a particular homography, our gradient-descent loss function computes the per-pixel difference between the warped first image and the original second image.)</p>
 
-                <img src="media/data/room_left.jpg" alt="img" width=auto height="300">
-                <img src="media/data/room_right.jpg" alt="img" width=auto height="300">
+                <img src="media/data/room_left.jpg" alt="img" width="auto" height="300">
+                <img src="media/data/room_right.jpg" alt="img" width="auto" height="300">
 
-                <img src="media/out/labels_room_left.jpg" alt="img" width=auto height="300">
-                <img src="media/out/labels_room_right.jpg" alt="img" width=auto height="300">
+                <img src="media/out/labels_room_left.jpg" alt="img" width="auto" height="300">
+                <img src="media/out/labels_room_right.jpg" alt="img" width="auto" height="300">
 
                 <p>[Two photos <code>room_left.jpg</code> and <code>room_right.jpg</code>; with matching labels.]</p>
+
+                <img src="media/out/mosaic_room_initwarp" alt="img" width="auto" height="300">
+                
+                <p>The result of warping <code>room_left.jpg</code> to fit the corresponding points of <code>room_right.jpg</code>.</p>
                 
                 <p>Once a precise homography is obtained, the resulting warped first image and original second image must be combined in a way that prevents visual artifacts. We divide the combined image into three regions: one in which the warped first image is the sole contributor, one in which the original second image is the sole contributor, and one in which both images contribute. For each pixel in the region of overlap, we calculate the Manhattan distance between the pixel and each of the exclusive regions. These distances decide the weights for our weighted-average computation of the RGB values of the pixel in the combined image.</p>
 
-                <img src="media/data/room_left.jpg" alt="img" width=auto height="400">
-                <img src="media/data/room_right.jpg" alt="img" width=auto height="400">
-                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
-                <p>[Two photos <code>room_left.jpg</code> and <code>room_right.jpg</code>; a mosaic of the two photos.]</p>
+                <img src="media/out/mosaic_room.jpg" alt="img" width="auto" height="400">
+                <p>[A mosaic of <code>room_left.jpg</code> and <code>room_right.jpg</code>.]</p>
 
-                <img src="media/data/couch_left.jpg" alt="img" width=auto height="400">
-                <img src="media/data/couch_right.jpg" alt="img" width=auto height="400">
-                <img src="media/out/mosaic_couch.jpg" alt="img" width=auto height="400">
+                <img src="media/data/couch_left.jpg" alt="img" width="auto" height="400">
+                <img src="media/data/couch_right.jpg" alt="img" width="auto" height="400">
+                <img src="media/out/mosaic_couch.jpg" alt="img" width="auto" height="400">
                 <p>[Two photos <code>couch_left.jpg</code> and <code>couch_right.jpg</code>; a mosaic of the two photos.]</p>
 
-                <img src="media/data/plushies_left.jpg" alt="img" width=auto height="400">
-                <img src="media/data/plushies_right.jpg" alt="img" width=auto height="400">
-                <img src="media/out/mosaic_plushies.jpg" alt="img" width=auto height="400">
+                <img src="media/data/plushies_left.jpg" alt="img" width="auto" height="400">
+                <img src="media/data/plushies_right.jpg" alt="img" width="auto" height="400">
+                <img src="media/out/mosaic_plushies.jpg" alt="img" width="auto" height="400">
                 <p>[Two photos <code>plushies_left.jpg</code> and <code>plushies_right.jpg</code>; a mosaic of the two photos.]</p>
 
         <h2>Automated Labelling</h2>
@@ -84,8 +86,8 @@
 
                 <p>The project spec provides us with a <code>get_harris_corners</code> function. This function takes a grayscale image as input and outputs all integer-coordinate points that are local maximums for "corner strength". (A point has high corner strength if the derivatives of the image w.r.t. x and w.r.t. y are both large at that point.)</p>
 
-                <img src="media/out/debug_corners1_all.jpg" alt="img" width=auto height="400">
-                <img src="media/out/debug_corners2_all.jpg" alt="img" width=auto height="400">
+                <img src="media/out/debug_corners1_all.jpg" alt="img" width="auto" height="400">
+                <img src="media/out/debug_corners2_all.jpg" alt="img" width="auto" height="400">
 
                 <p>[The results of calling <code>get_harris_corners</code> on <code>room_left.jpg</code> and <code>room_right.jpg</code>.]</p>
 
@@ -99,8 +101,8 @@
 
                 <p>(It turns out that calculating suppression radii is the most computationally expensive part of automated mosaicing. I found it helpful to ignore all but the 5000 points with greatest corner strength while calculating suppression radii and deciding which points to keep.)</p>
 
-                <img src="media/out/debug_anms1.jpg" alt="img" width=auto height="400">
-                <img src="media/out/debug_anms2.jpg" alt="img" width=auto height="400">
+                <img src="media/out/debug_anms1.jpg" alt="img" width="auto" height="400">
+                <img src="media/out/debug_anms2.jpg" alt="img" width="auto" height="400">
 
                 <p>[The results of applying ANMS to the previous images.]</p>
 
@@ -118,25 +120,25 @@
                 
                 <p>We conclude feature matching by identifying all pairs of points <code>(p, q)</code> that are "symmetrically" satisfactory; that is, <code>p</code> and <code>q</code> are each other's nearest neighbors and both points satisfy the <code>e1 / e2 &lt; 0.7</code> threshold.</p>
 
-                <img src="media/out/debug_pairs1.jpg" alt="img" width=auto height="400">
-                <img src="media/out/debug_pairs2.jpg" alt="img" width=auto height="400">
+                <img src="media/out/debug_pairs1.jpg" alt="img" width="auto" height="400">
+                <img src="media/out/debug_pairs2.jpg" alt="img" width="auto" height="400">
 
                 <p>[All pairs of points identified by matching the f.d.s of <code>room_left.jpg</code> and <code>room_right.jpg</code>.]</p>
 
                 <br>
 
-                <img src="media/out/debug_feature1_2.jpg" alt="img" width=auto height="200">
-                <img src="media/out/debug_feature2_2.jpg" alt="img" width=auto height="200">
+                <img src="media/out/debug_feature1_2.jpg" alt="img" width="auto" height="200">
+                <img src="media/out/debug_feature2_2.jpg" alt="img" width="auto" height="200">
 
                 <p>[The f.d.s for the pair of points at the bottom-left corner of the computer monitor, labelled "2".]</p>
 
-                <img src="media/out/debug_feature1_3.jpg" alt="img" width=auto height="200">
-                <img src="media/out/debug_feature2_3.jpg" alt="img" width=auto height="200">
+                <img src="media/out/debug_feature1_3.jpg" alt="img" width="auto" height="200">
+                <img src="media/out/debug_feature2_3.jpg" alt="img" width="auto" height="200">
 
                 <p>[The f.d.s for the pair of points at the top-right corner of the computer monitor, labelled "3".]</p>
 
-                <img src="media/out/debug_feature1_32.jpg" alt="img" width=auto height="200">
-                <img src="media/out/debug_feature2_32.jpg" alt="img" width=auto height="200">
+                <img src="media/out/debug_feature1_32.jpg" alt="img" width="auto" height="200">
+                <img src="media/out/debug_feature2_32.jpg" alt="img" width="auto" height="200">
 
                 <p>[The f.d.s for the pair of points at the top-right corner of the yellow water bottle, labelled "32".]</p>
 
@@ -152,20 +154,20 @@
 
             <h3>Results</h3>
 
-                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
-                <img src="media/out/autom_room.jpg" alt="img" width=auto height="400">
+                <img src="media/out/mosaic_room.jpg" alt="img" width="auto" height="400">
+                <img src="media/out/autom_room.jpg" alt="img" width="auto" height="400">
 
                 <br>
 
-                <img src="media/out/mosaic_couch.jpg" alt="img" width=auto height="400">
-                <img src="media/out/autom_couch.jpg" alt="img" width=auto height="400">
+                <img src="media/out/mosaic_couch.jpg" alt="img" width="auto" height="400">
+                <img src="media/out/autom_couch.jpg" alt="img" width="auto" height="400">
 
                 <br>
 
-                <img src="media/out/mosaic_plushies.jpg" alt="img" width=auto height="400">
-                <img src="media/out/autom_plushies.jpg" alt="img" width=auto height="400">
+                <img src="media/out/mosaic_plushies.jpg" alt="img" width="auto" height="400">
+                <img src="media/out/autom_plushies.jpg" alt="img" width="auto" height="400">
 
-                <p>The results of manual (left) and automated (right) mosaicing.</p>
+                <p>[The results of manual (left) and automated (right) mosaicing.]</p>
 
         <h2>Bells and Whistles</h2>
 
@@ -179,12 +181,12 @@
 
                     <p>In our code for obtaining the initial points of interest, we call <code>get_harris_corners</code> on each level of a pyramid. Then we combine the results of these calls (while recording the "origin level" of each point) and proceed normally. The origin level of a point matters primarily for computing its feature descriptor.</p>
 
-                    <img src="media/out/debug_corners1_level0.jpg" alt="img" width=auto height="400">
-                    <img src="media/out/debug_corners1_level1.jpg" alt="img" width=auto height="400">
+                    <img src="media/out/debug_corners1_level0.jpg" alt="img" width="auto" height="400">
+                    <img src="media/out/debug_corners1_level1.jpg" alt="img" width="auto" height="400">
 
                     <p>[Harris corners for the zeroth and first levels of the Gaussian pyramid derived from a doubled-resolution <code>room_left.jpg</code>.]</p>
                     
-                    <img src="media/out/autom_plushies.jpg" alt="img" width=auto height="400">
+                    <img src="media/out/autom_plushies.jpg" alt="img" width="auto" height="400">
 
                     <p>[The automated mosaic between <code>room_left.jpg</code> and <code>room_right.jpg</code>; the automated mosaic between a doubled-resolution <code>room_left.jpg</code> and the original <code>room_right.jpg</code>.]</p>
 
@@ -196,13 +198,13 @@
 
                     <p>Given an unordered set of images, we remove the two images for which feature matching yields the most corresponding points across all pairs of images. Then we combine these images via automated mosaicing and append the result to the set. We repeat this process until no pair of images in the set has at least <code>min_pairs</code> pairs of corresponding points.</p>
 
-                    <img src="media/out/autom_unordered0.jpg" alt="img" width=auto height="400">
-                    <img src="media/out/autom_unordered1.jpg" alt="img" width=auto height="400">
+                    <img src="media/out/autom_unordered0.jpg" alt="img" width="auto" height="400">
+                    <img src="media/out/autom_unordered1.jpg" alt="img" width="auto" height="400">
 
                     <br>
 
-                    <img src="media/out/autom_unordered2.jpg" alt="img" width=auto height="400">
-                    <img src="media/out/autom_unordered3.jpg" alt="img" width=auto height="400">
+                    <img src="media/out/autom_unordered2.jpg" alt="img" width="auto" height="400">
+                    <img src="media/out/autom_unordered3.jpg" alt="img" width="auto" height="400">
                     
                     <p>[The result of processing a shuffled list containing the two room photos, the two couch photos, the two plushie photos, and the door photo.]</p>
 
