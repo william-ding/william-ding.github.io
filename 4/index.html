@@ -110,24 +110,24 @@
                 <img src="media/out/debug_pairs1.jpg" alt="img" width=auto height="400">
                 <img src="media/out/debug_pairs2.jpg" alt="img" width=auto height="400">
 
-                <p>[The pairs of points identified by matching the f.d.s of <code>room_left.jpg</code> and <code>room_right.jpg</code>.]</p>
+                <p>[All pairs of points identified by matching the f.d.s of <code>room_left.jpg</code> and <code>room_right.jpg</code>.]</p>
 
                 <br>
 
                 <img src="media/out/debug_feature1_2.jpg" alt="img" width=auto height="200">
                 <img src="media/out/debug_feature2_2.jpg" alt="img" width=auto height="200">
 
-                <p>[The f.d.s. for the pair of points at the bottom-left corner of the computer monitor, labelled "2".]</p>
+                <p>[The f.d.s for the pair of points at the bottom-left corner of the computer monitor, labelled "2".]</p>
 
                 <img src="media/out/debug_feature1_3.jpg" alt="img" width=auto height="200">
                 <img src="media/out/debug_feature2_3.jpg" alt="img" width=auto height="200">
 
-                <p>[The f.d.s. for the pair of points at the top-right corner of the computer monitor, labelled "3".]</p>
+                <p>[The f.d.s for the pair of points at the top-right corner of the computer monitor, labelled "3".]</p>
 
                 <img src="media/out/debug_feature1_32.jpg" alt="img" width=auto height="200">
                 <img src="media/out/debug_feature2_32.jpg" alt="img" width=auto height="200">
 
-                <p>[The f.d.s. for the pair of points at the top-right corner of the yellow water bottle, labelled "32".]</p>
+                <p>[The f.d.s for the pair of points at the top-right corner of the yellow water bottle, labelled "32".]</p>
 
             <h3>RANSAC</h3>
 
@@ -161,6 +161,23 @@
             <p>Two improvements for automated mosaicing.</p>
 
             <h3>Scale Invariance</h3>
+
+                    <p>For two overlapping images with drastically different resolutions, the feature-matching process described above will not work well because feature descriptors for the larger image with appear "zoomed in" compared to feature descriptors for the smaller image. We solve this problem by sampling Harris corners from a Gaussian pyramid, as mentioned by Brown et al.</p>
+
+                    <p>We create a Gaussian pyramid for each input image by repeatedly smoothing and downsampling the image. Lower-resolution levels in the pyramid let us capture more pixels from the original image when we compute feature descriptors. The pyramid should not be too deep, however, because the sub-pixel errors inherent to <code>get_harris_corners</code> grow enormously when we convert from the coordinates of a low-resolution level to the coordinates of the original level.</p>
+
+                    <p>In our code for obtaining the initial points of interest, we call <code>get_harris_corners</code> on each level of a pyramid. Then we combine the results of these calls (while recording the "origin level" of each point) and proceed normally. The origin level of a point matters primarily for computing its feature descriptor.</p>
+
+                    <img src="media/out/debug_corners1_level0.jpg" alt="img" width=auto height="400">
+                    <img src="media/out/debug_corners1_level1.jpg" alt="img" width=auto height="400">
+
+                    <p>[Harris corners for the zeroth and first levels of the Gaussian pyramid derived from a doubled-resolution <code>room_left.jpg</code>.]</p>
+                    
+                    <img src="media/out/autom_plushies.jpg" alt="img" width=auto height="400">
+
+                    <p>[The automated mosaic between <code>room_left.jpg</code> and <code>room_right.jpg</code>; the automated mosaic between a doubled-resolution <code>room_left.jpg</code> and the original <code>room_right.jpg</code>.]</p>
+
+                    <p>We can see that the automated mosaic becomes slightly worse when we introduce a doubled-resolution <code>room_left.jpg</code>. This makes sense because our reliance on the first level of the Gaussian pyramid effectively doubles the errors of <code>get_harris_corners</code>.</p>
 
             <h3>Unordered Set Processing</h3>
 
