@@ -128,9 +128,24 @@
 
                 <p>[Matching f.d.s of <code>room_left.jpg</code> and <code>room_right.jpg</code>. The top-row f.d.s. are for index 2 (the bottom-left corner of the computer monitor); the middle-row f.d.s are for index 3 (the top-right corner of the computer monitor); the bottom-row f.d.s are for index 32 (the top-right corner of the yellow water bottle).]</p>
 
-
-
             <h3>RANSAC</h3>
 
-                <p>The final step in automating our mosaicing process is to compute a least-squares homography from our pairs of corresponding points.</p>
+                <p>The final step in automating our mosaicing process is to compute a least-squares homography from our pairs of corresponding points. Not all of our pairs are guaranteed to be correct, so we cannot simply use all of them in the homograpy computation.</p>
+
+                <p>Our strategy is to repeatedly and randomly select four pairs of corresponding points. For each selection, we compute the homography <code>H</code> implied by the four pairs. Then we count the "inliers" of <code>H</code>; that is, we count how many of our pairs are correctly mapped by <code>H</code>. This computation is very quick for an individual selection, so we can iterate over thousands of random selections.</p>
+
+                <p>After inspecting a sufficient number of selections, we choose the selection which has the maximum "inliers" count. The homography <code>H</code> for this selection is likely very close to the correct homography. We refine <code>H</code> by greedily introducing additional pairs of corresponding points to its least-squares computation until we can no longer improve the "inliers" count for our current <code>H</code>.</p>
+
+                <p>Once we have settled on a final <code>H</code>, we proceed with warping and overlapping. Unlike manual mosaicing, we do not need to improve <code>H</code> with gradient descent.</p>
+
+                <img src="media/out/debug_feature1_32.jpg" alt="img" width=auto height="400">
+                <img src="media/out/debug_feature2_32.jpg" alt="img" width=auto height="400">
+
+        <h2>Bells and Whistles</h2>
+
+            <p>Improvements to automated mosaicing:</p>
+
+            <h3>Scale Invariance</h3>
+
+            <h3>Unordered Set Processing</h3>
  </body>
