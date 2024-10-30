@@ -25,40 +25,71 @@
 
     <h1>Project 4: Warping and Mosaicing</h1>
 
-        <h2>Warping</h2>
+        <h2>Manual Work</h2>
 
-            <img src="media/data/room_left.jpg" alt="img" width=auto height="400">
-            <img src="media/out/rect_room_left.jpg" alt="img" width=auto height="400">
-            <p>[A photo of my desk; the same photo, warped so that the computer monitor appears rectangular.]</p>
-            <img src="media/data/door.jpg" alt="img" width=auto height="400">
-            <img src="media/out/rect_door.jpg" alt="img" width=auto height="600">
-            <p>[A photo of the door to my house; the same photo, warped so that the door appears rectangular.]</p>
+            <h3>Warping</h3>
 
-            <p>Given two sets of four points, we can compute a "homography" that captures the projective transformation from one set of points to the other. Additional pairs of points let us compute a least-squares homography that is less sensitive to errors in the placement of individual points.</p>
-            
-            <p>To obtain a "rectification" of an image, we label four points in the image. Then we compute the homography between the labelled points and a rectangle of our choice. Applying the homography to the image produces a warped version of the image in which the region defined by the labelled points appears rectangular.</p>
-            <p>For the photo of my desk, I labelled the four corners of the computer monitor and mapped these points to a 16:9 rectangle (the monitor has a 16:9 aspect ratio). For the photo of the door, I labelled the four corners of the doorframe and mapped these points to a 1:2 rectangle.</p>
-        
-        <h2>Mosaicing</h2>
+                <img src="media/data/room_left.jpg" alt="img" width=auto height="400">
+                <img src="media/out/rect_room_left.jpg" alt="img" width=auto height="400">
+                <p>[A photo of my desk; the same photo, warped so that the computer monitor appears rectangular.]</p>
+                <img src="media/data/door.jpg" alt="img" width=auto height="400">
+                <img src="media/out/rect_door.jpg" alt="img" width=auto height="600">
+                <p>[A photo of the door to my house; the same photo, warped so that the door appears rectangular.]</p>
 
-            <img src="media/data/room_left.jpg" alt="img" width=auto height="400">
-            <img src="media/data/room_right.jpg" alt="img" width=auto height="400">
-            <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
-            <p>[Two photos of my desk and bed; a mosaic of the two photos.]</p>
-
-            <img src="media/data/couch_left.jpg" alt="img" width=auto height="400">
-            <img src="media/data/couch_right.jpg" alt="img" width=auto height="400">
-            <img src="media/out/mosaic_couch.jpg" alt="img" width=auto height="400">
-            <p>[Two photos of a couch; a mosaic of the two photos.]</p>
-
-            <img src="media/data/plushies_left.jpg" alt="img" width=auto height="400">
-            <img src="media/data/plushies_right.jpg" alt="img" width=auto height="400">
-            <img src="media/out/mosaic_plushies.jpg" alt="img" width=auto height="400">
-            <p>[Two photos of a subset of my plushies; a mosaic of the two photos.]</p>
-            
-            <p>Rather than mapping the labelled points of an image to a rectangle, we can map the labelled points of an image to corresponding points in a second image (that was taken from approximately the same point in space). Applying the resulting homography to the first image warps it to match the perspective of the second image, and combining the warped first image with the original second image produces a seamless "mosaic."</p>
+                <p>Given two sets of four points, we can compute a "homography" that captures the projective transformation from one set of points to the other. Additional pairs of points let us compute a least-squares homography that is less sensitive to errors in the placement of individual points.</p>
                 
-            <p>A homography defined by hand-picked pairs of corresponding points may be imprecise. To improve the homography, we perform gradient descent over the eight parameters of the homography. (For a particular homography, our gradient-descent loss function computes the per-pixel difference between the warped first image and the original second image.)</p>
+                <p>To obtain a "rectification" of an image, we label four points in the image. Then we compute the homography between the labelled points and a rectangle of our choice. Applying the homography to the image produces a warped version of the image in which the region defined by the labelled points appears rectangular.</p>
+                <p>For the photo of my desk, I labelled the four corners of the computer monitor and mapped these points to a 16:9 rectangle (the monitor has a 16:9 aspect ratio). For the photo of the door, I labelled the four corners of the doorframe and mapped these points to a 1:2 rectangle.</p>
             
-            <p>Once a precise homography is obtained, the resulting warped first image and original second image must be combined in a way that prevents visual artifacts. We divide the combined image into three regions: one in which the warped first image is the sole contributor, one in which the original second image is the sole contributor, and one in which both images contribute. For each pixel in the region of overlap, we calculate the Manhattan distance between the pixel and each of the exclusive regions. These distances decide the weights for our weighted-average computation of the RGB values of the pixel in the combined image.</p>
-</body>
+            <h3>Mosaicing</h3>
+
+                <img src="media/data/room_left.jpg" alt="img" width=auto height="400">
+                <img src="media/data/room_right.jpg" alt="img" width=auto height="400">
+                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
+                <p>[Two photos <code>room_left.jpg</code> and <code>room_right.jpg</code>; a mosaic of the two photos.]</p>
+
+                <img src="media/data/couch_left.jpg" alt="img" width=auto height="400">
+                <img src="media/data/couch_right.jpg" alt="img" width=auto height="400">
+                <img src="media/out/mosaic_couch.jpg" alt="img" width=auto height="400">
+                <p>[Two photos <code>couch_left.jpg</code> and <code>couch_right.jpg</code>; a mosaic of the two photos.]</p>
+
+                <img src="media/data/plushies_left.jpg" alt="img" width=auto height="400">
+                <img src="media/data/plushies_right.jpg" alt="img" width=auto height="400">
+                <img src="media/out/mosaic_plushies.jpg" alt="img" width=auto height="400">
+                <p>[Two photos <code>plushies_left.jpg</code> and <code>plushies_right.jpg</code>; a mosaic of the two photos.]</p>
+                
+                <p>Rather than mapping the labelled points of an image to a rectangle, we can map the labelled points of an image to corresponding points in a second image (that was taken from approximately the same point in space). Applying the resulting homography to the first image warps it to match the perspective of the second image, and combining the warped first image with the original second image produces a seamless "mosaic."</p>
+                    
+                <p>A homography defined by hand-picked pairs of corresponding points may be imprecise. To improve the homography, we perform gradient descent over the eight parameters of the homography. (For a particular homography, our gradient-descent loss function computes the per-pixel difference between the warped first image and the original second image.)</p>
+                
+                <p>Once a precise homography is obtained, the resulting warped first image and original second image must be combined in a way that prevents visual artifacts. We divide the combined image into three regions: one in which the warped first image is the sole contributor, one in which the original second image is the sole contributor, and one in which both images contribute. For each pixel in the region of overlap, we calculate the Manhattan distance between the pixel and each of the exclusive regions. These distances decide the weights for our weighted-average computation of the RGB values of the pixel in the combined image.</p>
+
+        <h2>Automated Work</h2>
+
+            <p>We can automate our code for mosaicing by writing code that automatically determines the corresponding points of a homography.</p>
+
+            <h3>Harris Corners</h3>
+
+                <p>The project spec provides us with a <code>get_harris_corners</code> function. This function takes a grayscale image as input and outputs all integer-coordinate points that are local maximums for "corner strength". (A point has high corner strength if the derivatives of the image w.r.t. x and w.r.t. y are both large at that point.)</p>
+
+                <img src="media/out/debug_corners1_all.jpg" alt="img" width=auto height="400">
+                <img src="media/out/debug_corners2_all.jpg" alt="img" width=auto height="400">
+
+                <p>[The results of calling <code>get_harris_corners</code> on <code>room_left.jpg</code> and <code>room_right.jpg</code>.]</p>
+
+                <p>Calling <code>get_harris_corners</code> gives us thousands of points because the threshold for any given point being a local maximum is very low. Some points, such as the ones near the corners of the computer monitor, make sense. But most of them do not correspond to visible corners. We need to eliminate most of the returned points and keep only the best ones.</p>
+
+            <h3>Adaptive Non-Maximal Suppression</h3>
+
+                <p>We want to keep the returned points with the greatest corner strength. However, simply keeping the greatest-strength points is not good enough, as explained in "Multi-Image Matching using Multi-Scale Oriented Patches" (Brown et al.). This naive approach tends to keep points that are closely clustered. Instead, we want to keep points that are roughly evenly-distributed so that two overlapping photos are likely to have many corresponding points in their overlap.</p>
+
+                <p>The Adaptive Non-Maximal Suppression (ANMS) calculates the "suppression radius" of each returned point. The point with the highest corner strength has an infinite suppression radius; for each other point <code>p</code>, the suppression radius of <code>p</code> is  </p>
+
+                <p>(It turns out that calculating suppression radii is usually the most computationally expensive part of automated mosaicing. I found it helpful to ignore all but the 5000 points with greatest corner strength while calculating suppression radii and deciding which points to keep.)</p>
+
+                <img src="media/out/debug_anms1.jpg alt="img" width=auto height="400">
+                <img src="media/out/debug_anms2.jpg alt="img" width=auto height="400">
+
+                <p>In the post-ANMS examples above, we can see that the points on the corners of the computer monitor and other "sensible" points remain. But most of the arbitrary-looking points are gone.</p>
+
+ </body>
