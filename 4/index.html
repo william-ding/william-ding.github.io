@@ -107,8 +107,8 @@
                 
                 <p>We conclude feature matching by identifying all pairs of points <code>(p, q)</code> that are "symmetrically" satisfactory; that is, <code>p</code> and <code>q</code> are each other's nearest neighbors and both points satisfy the <code>e1 / e2 &lt; 0.7</code> threshold.</p>
 
-                <img src="media/out/debug_pairs1.jpg" alt="img" width=auto height="200">
-                <img src="media/out/debug_pairs2.jpg" alt="img" width=auto height="200">
+                <img src="media/out/debug_pairs1.jpg" alt="img" width=auto height="400">
+                <img src="media/out/debug_pairs2.jpg" alt="img" width=auto height="400">
 
                 <p>[The pairs of points identified by matching the f.d.s of <code>room_left.jpg</code> and <code>room_right.jpg</code>.]</p>
 
@@ -117,17 +117,17 @@
                 <img src="media/out/debug_feature1_2.jpg" alt="img" width=auto height="200">
                 <img src="media/out/debug_feature2_2.jpg" alt="img" width=auto height="200">
 
-                <br>
+                <p>[The f.d.s. for the pair of points at the bottom-left corner of the computer monitor, labelled "2".]</p>
 
                 <img src="media/out/debug_feature1_3.jpg" alt="img" width=auto height="200">
                 <img src="media/out/debug_feature2_3.jpg" alt="img" width=auto height="200">
 
-                <br>
+                <p>[The f.d.s. for the pair of points at the top-right corner of the computer monitor, labelled "3".]</p>
 
                 <img src="media/out/debug_feature1_32.jpg" alt="img" width=auto height="200">
                 <img src="media/out/debug_feature2_32.jpg" alt="img" width=auto height="200">
 
-                <p>[Matching f.d.s of <code>room_left.jpg</code> and <code>room_right.jpg</code>. The top-row f.d.s. are for index 2 (the bottom-left corner of the computer monitor); the middle-row f.d.s are for index 3 (the top-right corner of the computer monitor); the bottom-row f.d.s are for index 32 (the top-right corner of the yellow water bottle).]</p>
+                <p>[The f.d.s. for the pair of points at the top-right corner of the yellow water bottle, labelled "32".]</p>
 
             <h3>RANSAC</h3>
 
@@ -166,7 +166,7 @@
 
                     <p>We can use feature matching not just to find corresponding points between two overlapping images, but also to determine whether two images overlap at all. We define the constant value <code>min_pairs = 15</code>. If feature matching between images <code>im1</code> and <code>im2</code> yields less than <code>min_pairs</code> pairs of corresponding points, then it is very likely that <code>im1</code> and <code>im2</code> do not overlap.</p>
 
-                    <p>Given an unordered set of images, we remove the two images for which feature matching yields the most corresponding points across all pairs of images. Then we combine these images via automated mosaicing and append the result to the set. We repeat this process until no pair of image in the set has at least <code>min_pairs</code> pairs of corresponding points.</p>
+                    <p>Given an unordered set of images, we remove the two images for which feature matching yields the most corresponding points across all pairs of images. Then we combine these images via automated mosaicing and append the result to the set. We repeat this process until no pair of images in the set has at least <code>min_pairs</code> pairs of corresponding points.</p>
 
                     <img src="media/out/autom_unordered0.jpg" alt="img" width=auto height="400">
                     <img src="media/out/autom_unordered1.jpg" alt="img" width=auto height="400">
