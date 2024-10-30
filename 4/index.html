@@ -107,25 +107,25 @@
                 
                 <p>We conclude feature matching by identifying all pairs of points <code>(p, q)</code> that are "symmetrically" satisfactory; that is, <code>p</code> and <code>q</code> are each other's nearest neighbors and both points satisfy the <code>e1 / e2 &lt; 0.7</code> threshold.</p>
 
-                <img src="media/out/debug_pairs1.jpg" alt="img" width=auto height="400">
-                <img src="media/out/debug_pairs2.jpg" alt="img" width=auto height="400">
+                <img src="media/out/debug_pairs1.jpg" alt="img" width=auto height="200">
+                <img src="media/out/debug_pairs2.jpg" alt="img" width=auto height="200">
 
                 <p>[The pairs of points identified by matching the f.d.s of <code>room_left.jpg</code> and <code>room_right.jpg</code>.]</p>
 
                 <br>
 
-                <img src="media/out/debug_feature1_2.jpg" alt="img" width=auto height="400">
-                <img src="media/out/debug_feature2_2.jpg" alt="img" width=auto height="400">
+                <img src="media/out/debug_feature1_2.jpg" alt="img" width=auto height="200">
+                <img src="media/out/debug_feature2_2.jpg" alt="img" width=auto height="200">
 
                 <br>
 
-                <img src="media/out/debug_feature1_3.jpg" alt="img" width=auto height="400">
-                <img src="media/out/debug_feature2_3.jpg" alt="img" width=auto height="400">
+                <img src="media/out/debug_feature1_3.jpg" alt="img" width=auto height="200">
+                <img src="media/out/debug_feature2_3.jpg" alt="img" width=auto height="200">
 
                 <br>
 
-                <img src="media/out/debug_feature1_32.jpg" alt="img" width=auto height="400">
-                <img src="media/out/debug_feature2_32.jpg" alt="img" width=auto height="400">
+                <img src="media/out/debug_feature1_32.jpg" alt="img" width=auto height="200">
+                <img src="media/out/debug_feature2_32.jpg" alt="img" width=auto height="200">
 
                 <p>[Matching f.d.s of <code>room_left.jpg</code> and <code>room_right.jpg</code>. The top-row f.d.s. are for index 2 (the bottom-left corner of the computer monitor); the middle-row f.d.s are for index 3 (the top-right corner of the computer monitor); the bottom-row f.d.s are for index 32 (the top-right corner of the yellow water bottle).]</p>
 
@@ -141,20 +141,28 @@
 
             <h3>Results</h3>
 
-                <img src="media/data/room_left.jpg" alt="img" width=auto height="400">
-                <img src="media/data/room_right.jpg" alt="img" width=auto height="400">
-                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
-                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
+                <img src="media/data/room_left.jpg" alt="img" width=auto height="300">
+                <img src="media/data/room_right.jpg" alt="img" width=auto height="300">
+                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="300">
+                <img src="media/out/autom_room.jpg" alt="img" width=auto height="300">
 
-                <img src="media/data/room_left.jpg" alt="img" width=auto height="400">
-                <img src="media/data/room_right.jpg" alt="img" width=auto height="400">
-                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
-                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
 
-                <img src="media/data/room_left.jpg" alt="img" width=auto height="400">
-                <img src="media/data/room_right.jpg" alt="img" width=auto height="400">
-                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
-                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
+                <br>
+
+                <img src="media/data/couch_left.jpg" alt="img" width=auto height="300">
+                <img src="media/data/couch_right.jpg" alt="img" width=auto height="300">
+                <img src="media/out/mosaic_couch.jpg" alt="img" width=auto height="300">
+                <img src="media/out/autom_couch.jpg" alt="img" width=auto height="300">
+
+
+                <br>
+
+                <img src="media/data/plushies_left.jpg" alt="img" width=auto height="300">
+                <img src="media/data/plushies_right.jpg" alt="img" width=auto height="300">
+                <img src="media/out/mosaic_plushies.jpg" alt="img" width=auto height="300">
+                <img src="media/out/autom_plushies.jpg" alt="img" width=auto height="300">
+
+                <br>
 
         <h2>Bells and Whistles</h2>
 
@@ -163,4 +171,8 @@
             <h3>Scale Invariance</h3>
 
             <h3>Unordered Set Processing</h3>
+
+                    <p>We can use feature matching not just to find corresponding points between two overlapping images, but also to determine whether two images overlap at all. We define the constant value <code>min_pairs = 15</code>. If feature matching between images <code>im1</code> and <code>im2</code> yields less than <code>min_pairs</code> pairs of corresponding points, then it is very likely that <code>im1</code> and <code>im2</code> do not overlap.</p>
+
+                    <p>Given an unordered set of images, we can greedily combine these images</p>
  </body>
