@@ -146,14 +146,12 @@
                 <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="300">
                 <img src="media/out/autom_room.jpg" alt="img" width=auto height="300">
 
-
                 <br>
 
                 <img src="media/data/couch_left.jpg" alt="img" width=auto height="300">
                 <img src="media/data/couch_right.jpg" alt="img" width=auto height="300">
                 <img src="media/out/mosaic_couch.jpg" alt="img" width=auto height="300">
                 <img src="media/out/autom_couch.jpg" alt="img" width=auto height="300">
-
 
                 <br>
 
@@ -174,5 +172,17 @@
 
                     <p>We can use feature matching not just to find corresponding points between two overlapping images, but also to determine whether two images overlap at all. We define the constant value <code>min_pairs = 15</code>. If feature matching between images <code>im1</code> and <code>im2</code> yields less than <code>min_pairs</code> pairs of corresponding points, then it is very likely that <code>im1</code> and <code>im2</code> do not overlap.</p>
 
-                    <p>Given an unordered set of images, we can greedily combine these images</p>
+                    <p>Given an unordered set of images, we remove the two images for which feature matching yields the most corresponding points across all pairs of images. Then we combine these images via automated mosaicing and append the result to the set. We repeat this process until no pair of image in the set has at least <code>min_pairs</code> pairs of corresponding points.</p>
+
+                    <img src="media/out/autom_unordered0.jpg" alt="img" width=auto height="400">
+                    <img src="media/out/autom_unordered1.jpg" alt="img" width=auto height="400">
+
+                    <br>
+                    
+                    <img src="media/out/autom_unordered2.jpg" alt="img" width=auto height="400">
+                    <img src="media/out/autom_unordered3.jpg" alt="img" width=auto height="400">
+                    
+                    <p>[The result of processing a shuffled list containing the two room photos, the two couch photos, the two plushie photos, and the door photo.]</p>
+
+                    <p>In the results above, we can see that <code>door.jpg</code>, which does not overlap with any of the other input images, is unchanged.</p>
  </body>
