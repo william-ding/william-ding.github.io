@@ -33,16 +33,26 @@
 
                 <p>To obtain a "rectification" of an image, we label four points in the image. Then we compute the homography between the labelled points and a rectangle of our choice. Applying the homography to the image produces a warped version of the image in which the region defined by the labelled points appears rectangular.</p>
             
-                <img src="media/data/room_left.jpg" alt="img" width=auto height="400">
-                <img src="media/out/rect_room_left.jpg" alt="img" width=auto height="400">
-                <p>[A photo of my desk; the same photo, warped so that the computer monitor appears rectangular.]</p>
-                <img src="media/data/door.jpg" alt="img" width=auto height="400">
-                <img src="media/out/rect_door.jpg" alt="img" width=auto height="600">
-                <p>[A photo of the door to my house; the same photo, warped so that the door appears rectangular.]</p>
+                <img src="media/data/room_left.jpg" alt="img" width=auto height="300">
+                <img src="media/out/labels_rect_room_left.jpg" alt="img" width=auto height="300">
+                <img src="media/out/rect_room_left.jpg" alt="img" width=auto height="300">
+                <p>[A photo of my desk <code>(room_left.jpg)</code>; with labels; warped so that the computer monitor appears rectangular.]</p>
+
+                <img src="media/data/door.jpg" alt="img" width=auto height="300">
+                <img src="media/out/labels_rect_door.jpg" alt="img" width=auto height="300">
+                <img src="media/out/rect_door.jpg" alt="img" width=auto height="450">
+
+                <p>[A photo of the door to my house <code>(door.jpg)</code>; with labels; warped so that the door appears rectangular.]</p>
 
                 <p>For the photo of my desk, I labelled the four corners of the computer monitor and mapped these points to a 16:9 rectangle (the monitor has a 16:9 aspect ratio). For the photo of the door, I labelled the four corners of the doorframe and mapped these points to a 1:2 rectangle.</p>
             
             <h3>Mosaicing</h3>
+
+                <p>Rather than mapping the labelled points of an image to a rectangle, we can map the labelled points of an image to corresponding points in a second image (that was taken from approximately the same point in space). Applying the resulting homography to the first image warps it to match the perspective of the second image, and combining the warped first image with the original second image produces a seamless "mosaic."</p>
+                        
+                <p>A homography defined by hand-picked pairs of corresponding points may be imprecise. To improve the homography, we perform gradient descent over the eight parameters of the homography. (For a particular homography, our gradient-descent loss function computes the per-pixel difference between the warped first image and the original second image.)</p>
+                
+                <p>Once a precise homography is obtained, the resulting warped first image and original second image must be combined in a way that prevents visual artifacts. We divide the combined image into three regions: one in which the warped first image is the sole contributor, one in which the original second image is the sole contributor, and one in which both images contribute. For each pixel in the region of overlap, we calculate the Manhattan distance between the pixel and each of the exclusive regions. These distances decide the weights for our weighted-average computation of the RGB values of the pixel in the combined image.</p>
 
                 <img src="media/data/room_left.jpg" alt="img" width=auto height="400">
                 <img src="media/data/room_right.jpg" alt="img" width=auto height="400">
@@ -58,12 +68,6 @@
                 <img src="media/data/plushies_right.jpg" alt="img" width=auto height="400">
                 <img src="media/out/mosaic_plushies.jpg" alt="img" width=auto height="400">
                 <p>[Two photos <code>plushies_left.jpg</code> and <code>plushies_right.jpg</code>; a mosaic of the two photos.]</p>
-                
-                <p>Rather than mapping the labelled points of an image to a rectangle, we can map the labelled points of an image to corresponding points in a second image (that was taken from approximately the same point in space). Applying the resulting homography to the first image warps it to match the perspective of the second image, and combining the warped first image with the original second image produces a seamless "mosaic."</p>
-                    
-                <p>A homography defined by hand-picked pairs of corresponding points may be imprecise. To improve the homography, we perform gradient descent over the eight parameters of the homography. (For a particular homography, our gradient-descent loss function computes the per-pixel difference between the warped first image and the original second image.)</p>
-                
-                <p>Once a precise homography is obtained, the resulting warped first image and original second image must be combined in a way that prevents visual artifacts. We divide the combined image into three regions: one in which the warped first image is the sole contributor, one in which the original second image is the sole contributor, and one in which both images contribute. For each pixel in the region of overlap, we calculate the Manhattan distance between the pixel and each of the exclusive regions. These distances decide the weights for our weighted-average computation of the RGB values of the pixel in the combined image.</p>
 
         <h2>Automated Work</h2>
 
@@ -143,6 +147,8 @@
 
                 <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
                 <img src="media/out/autom_room.jpg" alt="img" width=auto height="400">
+
+                <p>The </p>
 
                 <br>
 
