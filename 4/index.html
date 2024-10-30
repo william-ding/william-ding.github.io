@@ -66,7 +66,7 @@
 
         <h2>Automated Work</h2>
 
-            <p>We can automate our code for mosaicing by writing code that automatically determines the corresponding points of a homography.</p>
+            <p>We can automate our code for mosaicing by writing code that automatically determines the corresponding points of a homography. Our approach is a simplified version of the approach described in ""Multi-Image Matching using Multi-Scale Oriented Patches" (Brown et al.).</p>
 
             <h3>Harris Corners</h3>
 
@@ -77,21 +77,60 @@
 
                 <p>[The results of calling <code>get_harris_corners</code> on <code>room_left.jpg</code> and <code>room_right.jpg</code>.]</p>
 
-                <p>Calling <code>get_harris_corners</code> gives us thousands of points because the threshold for any given point being a local maximum is very low. Some points, such as the ones near the corners of the computer monitor, make sense. But most of them do not correspond to visible corners. We need to eliminate most of the returned points and keep only the best ones.</p>
+                <p>Calling <code>get_harris_corners</code> gives us thousands of points because the threshold for any given point being a local maximum is very low. Some points, such as the points on the corners of the computer monitor, make sense. But most of them do not correspond to visible corners. We need to eliminate most of the returned points and keep only the best ones.</p>
 
             <h3>Adaptive Non-Maximal Suppression</h3>
 
-                <p>We want to keep the returned points with the greatest corner strength. However, simply keeping the greatest-strength points is not good enough, as explained in "Multi-Image Matching using Multi-Scale Oriented Patches" (Brown et al.). This naive approach tends to keep points that are closely clustered. Instead, we want to keep points that are roughly evenly-distributed so that two overlapping photos are likely to have many corresponding points in their overlap.</p>
+                <p>We want to keep the returned points with the greatest corner strength. However, simply keeping the greatest-strength points is not good enough, as explained by Brown et al. This naive strategy tends to keep points that are closely clustered. Instead, we want to keep points that are roughly evenly-distributed so that two overlapping images are likely to have many corresponding points in their overlap.</p>
 
                 <p>The Adaptive Non-Maximal Suppression (ANMS) strategy calculates the "suppression radius" of each returned point. The point with the highest corner strength has an infinite suppression radius; for each other point <code>p</code>, the suppression radius of <code>p</code> is the minimum distance to a point with "significantly greater" corner strength (in our case, at least 11.1% more). ANMS keeps the 500 points with the greatest suppression radii.</p>
 
-                <p>(It turns out that calculating suppression radii is usually the most computationally expensive part of automated mosaicing. I found it helpful to ignore all but the 5000 points with greatest corner strength while calculating suppression radii and deciding which points to keep.)</p>
+                <p>(It turns out that calculating suppression radii is the most computationally expensive part of automated mosaicing. I found it helpful to ignore all but the 5000 points with greatest corner strength while calculating suppression radii and deciding which points to keep.)</p>
 
                 <img src="media/out/debug_anms1.jpg" alt="img" width=auto height="400">
                 <img src="media/out/debug_anms2.jpg" alt="img" width=auto height="400">
 
                 <p>[The results of applying ANMS to the previous images.]</p>
 
-                <p>In the post-ANMS examples above, we can see that the points on the corners of the computer monitor and other "sensible" points remain. But most of the arbitrary-looking points are gone.</p>
+                <p>In the post-ANMS examples above, we can see that the points on the corners of the computer monitor and other "sensible" points remain. But most of the arbitrary-looking points are gone. Furthermore, the remaining points are distributed fairly evenly.</p>
 
+            <h3>Feature Descriptors and Feature Matching</h3>
+
+                <p>Once we have identified points that correspond to meaningful corners in an image, we obtain the "feature descriptor" of each point. The feature descriptor for point <code>p</code> samples the 40x40 pixels surrounding <code>p</code> and compresses them into an 8x8 grayscale image.</p>
+
+                <p>With the post-ANMS points and feature descriptors for two overlapping images, we can now perform "feature matching" to find corresponding points between the two images. We measure the error between two feature descriptors as the squared norm of their difference, which is easily calculated in NumPy.</p>
+
+                <p>For each post-ANMS point <code>p</code> in image <code>im1</code>, we compute the nearest neighbor of <code>p</code> in image <code>im2</code>; that is, the point <code>q1</code> in <code>im2</code> whose feature descriptor has the least error with the feature descriptor of <code>p</code>. We also compute the second-nearest neighbor <code>q2</code> of <code>p</code>.
+
+                <p>Let <code>e1</code> be the error between the f.d.s of <code>p</code> and <code>q1</code>; let <code>e2</code> be the error between the f.d.s of <code>p</code> and <code>q2</code>. From "Distinctive image features from scale-invariant keypoints" (Lowe), we know that the ratio <code>e1 / e2</code> is closely linked to whether <code>p</code> and <code>q1</code> are corresponding points. In particular, Brown et al. tell us that <code>p</code> and <code>q1</code> are overwhelmingly likely to be corresponding points when <code>e1 / e2 &lt; 0.4</code>. However, our RANSAC method for computing a least-squares homography works even if we incorrectly identify many pairs of points as corresponding, so we choose a more generous threshold of <code>e1 / e2 &lt; 0.7</code>.</p>
+                
+                <p>We conclude feature matching by identifying all pairs of points <code>(p, q)</code> that are "symmetrically" satisfactory; that is, <code>p</code> and <code>q</code> are each other's nearest neighbors and satisfy each other's <code>e1 / e2 &lt; 0.7</code> thresholds.</p>
+
+                <img src="media/out/debug_pairs1.jpg" alt="img" width=auto height="400">
+                <img src="media/out/debug_pairs2.jpg" alt="img" width=auto height="400">
+
+                <p>[The pairs of points identified by matching the f.d.s of <code>room_left.jpg</code> and <code>room_right.jpg</code>.]</p>
+
+                <br>
+
+                <img src="media/out/debug_feature1_2.jpg" alt="img" width=auto height="400">
+                <img src="media/out/debug_feature2_2.jpg" alt="img" width=auto height="400">
+
+                <br>
+
+                <img src="media/out/debug_feature1_3.jpg" alt="img" width=auto height="400">
+                <img src="media/out/debug_feature2_3.jpg" alt="img" width=auto height="400">
+
+                <br>
+
+                <img src="media/out/debug_feature1_32.jpg" alt="img" width=auto height="400">
+                <img src="media/out/debug_feature2_32.jpg" alt="img" width=auto height="400">
+
+                <p>[Matching f.d.s of <code>room_left.jpg</code> and <code>room_right.jpg</code>. The top-row f.d.s. are for index 2 (the bottom-left corner of the computer monitor); the middle-row f.d.s are for index 3 (the top-right corner of the computer monitor); the bottom-row f.d.s are for index 32 (the top-right corner of the yellow water bottle).]</p>
+
+
+
+            <h3>RANSAC</h3>
+
+                <p>The final step in automating our mosaicing process is to compute a least-squares homography from our pairs of corresponding points.</p>
  </body>
