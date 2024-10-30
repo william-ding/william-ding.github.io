@@ -83,7 +83,7 @@
 
                 <p>We want to keep the returned points with the greatest corner strength. However, simply keeping the greatest-strength points is not good enough, as explained in "Multi-Image Matching using Multi-Scale Oriented Patches" (Brown et al.). This naive approach tends to keep points that are closely clustered. Instead, we want to keep points that are roughly evenly-distributed so that two overlapping photos are likely to have many corresponding points in their overlap.</p>
 
-                <p>The Adaptive Non-Maximal Suppression (ANMS) calculates the "suppression radius" of each returned point. The point with the highest corner strength has an infinite suppression radius; for each other point <code>p</code>, the suppression radius of <code>p</code> is  </p>
+                <p>The Adaptive Non-Maximal Suppression (ANMS) strategy calculates the "suppression radius" of each returned point. The point with the highest corner strength has an infinite suppression radius; for each other point <code>p</code>, the suppression radius of <code>p</code> is the minimum distance to a point with "significantly greater" corner strength (in our case, at least 11.1% more). ANMS keeps the 500 points with the greatest suppression radii.</p>
 
                 <p>(It turns out that calculating suppression radii is usually the most computationally expensive part of automated mosaicing. I found it helpful to ignore all but the 5000 points with greatest corner strength while calculating suppression radii and deciding which points to keep.)</p>
 
