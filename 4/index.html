@@ -105,7 +105,7 @@
 
                 <p>Let <code>e1</code> be the error between the f.d.s of <code>p</code> and <code>q1</code>; let <code>e2</code> be the error between the f.d.s of <code>p</code> and <code>q2</code>. From "Distinctive image features from scale-invariant keypoints" (Lowe), we know that the ratio <code>e1 / e2</code> is closely linked to whether <code>p</code> and <code>q1</code> are corresponding points. In particular, Brown et al. tell us that <code>p</code> and <code>q1</code> are overwhelmingly likely to be corresponding points when <code>e1 / e2 &lt; 0.4</code>. However, our RANSAC method for computing a least-squares homography works even if we incorrectly identify many pairs of points as corresponding, so we choose a more generous threshold of <code>e1 / e2 &lt; 0.7</code>.</p>
                 
-                <p>We conclude feature matching by identifying all pairs of points <code>(p, q)</code> that are "symmetrically" satisfactory; that is, <code>p</code> and <code>q</code> are each other's nearest neighbors and satisfy each other's <code>e1 / e2 &lt; 0.7</code> thresholds.</p>
+                <p>We conclude feature matching by identifying all pairs of points <code>(p, q)</code> that are "symmetrically" satisfactory; that is, <code>p</code> and <code>q</code> are each other's nearest neighbors and both points satisfy the <code>e1 / e2 &lt; 0.7</code> threshold.</p>
 
                 <img src="media/out/debug_pairs1.jpg" alt="img" width=auto height="400">
                 <img src="media/out/debug_pairs2.jpg" alt="img" width=auto height="400">
@@ -139,12 +139,26 @@
 
                 <p>Once we have settled on a final <code>H</code>, we proceed with warping and overlapping. Unlike manual mosaicing, we do not need to improve <code>H</code> with gradient descent.</p>
 
-                <img src="media/out/debug_feature1_32.jpg" alt="img" width=auto height="400">
-                <img src="media/out/debug_feature2_32.jpg" alt="img" width=auto height="400">
+            <h3>Results</h3>
+
+                <img src="media/data/room_left.jpg" alt="img" width=auto height="400">
+                <img src="media/data/room_right.jpg" alt="img" width=auto height="400">
+                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
+                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
+
+                <img src="media/data/room_left.jpg" alt="img" width=auto height="400">
+                <img src="media/data/room_right.jpg" alt="img" width=auto height="400">
+                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
+                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
+
+                <img src="media/data/room_left.jpg" alt="img" width=auto height="400">
+                <img src="media/data/room_right.jpg" alt="img" width=auto height="400">
+                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
+                <img src="media/out/mosaic_room.jpg" alt="img" width=auto height="400">
 
         <h2>Bells and Whistles</h2>
 
-            <p>Improvements to automated mosaicing:</p>
+            <p>Two improvements for automated mosaicing.</p>
 
             <h3>Scale Invariance</h3>
 
