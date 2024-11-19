@@ -92,7 +92,7 @@
 
             <h3>1.5 Diffusion Model Sampling</h3>
 
-                <p>We sample images from our iterative denoising process by passing in a pure-noise image with timestep <code>t=990</code>. (We also pass in the default text prompt.)</p>
+                <p>We sample an image from our iterative denoising process by passing in a pure-noise image with timestep <code>t=990</code>. (We also pass in the default text prompt.)</p>
 
                 <span>samples</span>
 
@@ -100,9 +100,9 @@
 
                 <p>We improve the quality of our sampled images with "Classifier-Free Guidance". In addition to the default text prompt ("a high quality photo"), we pass in the null prompt ("") to DeepFloyd. For a given <code>x_t</code>, each of our prompts provides a noise estimate. The former prompt provides our conditioned estimate <code>err_c</code>; the latter prompt provides our unconditioned estimate <code>err_u</code>.</p>
 
-                <p>For some value <code>gamma &gt; 1</code>, we compute <code>err = err_u + gamma * (err_c - err_u). Note that <code>err</code> is essentially a weighted average in which <code>err_c</code> receives highly positive weight and <code>err_u</code> receives negative weight; in other words, <code>err</code> is a more extreme version of <code>err_c</code>. We use <code>err</code> in our subsequent computation of <code>x_{t-30}.</code>
+                <p>For some value <code>gamma &gt; 1</code>, we compute <code>err = err_u + gamma * (err_c - err_u)</code>. Note that <code>err</code> is essentially a weighted average in which <code>err_c</code> receives highly positive weight and <code>err_u</code> receives negative weight; in other words, <code>err</code> is a more extreme version of <code>err_c</code>. We use <code>err</code> in our subsequent computation of <code>x_{t-30}.</code>
 
-                <p>We sample images from our CFG-enhanced iterative denoised process. We use the value <code>gamma = 7</code>.</p>
+                <p>Now we sample images from our CFG-enhanced iterative denoised process. We use the value <code>gamma = 7</code>.</p>
 
                 <span>samples</span>
 
