@@ -141,11 +141,13 @@
 
                 <p>We execute our denoising process with a high initial timestep and an input of pure noise. For each (strided) iteration of the denoising process, we get a noise estimate <code>err_1</code> for the current <code>x_t</code> with our right-side-up prompt and a noise estimate <code>err_2</code> with our upside-down prompt. The weighted average <code>err = w * err_1 + (1 - w) * err_2</code> (for <code>0 &lt; w &lt; 1</code>) is used to compute <code>x_{t-30}</code>.</p> (Computing <code>err_2</code> requires us to flip <code>x_t</code> beforehand.)</p>
 
+                <span>visual anagrams</span>
+
             <h3>1.9 Hybrid Images</h3>
 
-                <p>A "hybrid image" depicts different things when viewed close-up and far-away. The close-up view relies on high-frequency features of the image, and the far-away view relies on low-frequency features. To generate a hybrid image, we need a condition prompt for the high-frequency features and a condition prompt for the low-frequency features.</p>
+                <p>A "hybrid image" depicts different things when viewed close-up and far-away. The close-up view relies on high-frequency features of the image, and the far-away view relies on low-frequency features. To generate a hybrid image, we need a condition prompt for the high-frequency features of our desired image and a condition prompt for the low-frequency features.</p>
 
-                <p></p>
+                <span>hybrid images</span>
 
         <h2>Part B: Diffusion Models From Scratch</h2>
 
