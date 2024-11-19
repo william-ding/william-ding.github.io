@@ -27,7 +27,6 @@
 
         <h2>Part A: Using Diffusion Models</h2>
 
-
             <h3>The DeepFloyd Model</h3>
 
                 <p>Part A of this project relies on the DeepFloyd IF diffusion model, which is available on Hugging Face. The first stage of DeepFloyd IF takes a text prompt and outputs a 64x64 color image; the second stage upscales the image to 256x256.</p>
@@ -60,8 +59,6 @@
 
                 <span>x_t</span>
 
-
-
             <h3>1.2 Classical Denoising</h3>
 
                 <p>A simple way to remove noise from an image is to blur it. We apply a Gaussian blur filter (with a kernel size of 13) to each <code>x_t</code>.</p>
@@ -83,7 +80,7 @@
 
                 <p>(To compute the estimated noise of <code>x_t</code>, DeepFloyd must receive an embedded text prompt that describes the desired <code>x_0</code>. By default, we supply the text prompt "a high quality photo".)</p>
 
-                <p>Iterating hundreds of times is costly. We define a sequence of "strided timesteps" in which each strided timestep corresponds to 30 canonical timesteps. In particular, we have <code>st[0]=990, st[1]=960, ..., st[33]=0</code>. We use a modified denoising formula to iterate over strided timesteps instead of canonical timesteps.</p>
+                <p>Iterating hundreds of times is costly. We define a sequence of "strided timesteps" in which each strided timestep corresponds to 30 canonical timesteps. In particular, we have <code>st[0]=990, st[1]=960, ..., st[33]=0</code>. We use a modified denoising formula to iterate over strided timesteps instead of canonical timesteps; in each iteration, we compute <code>x_{t-30}</code> instead of <code>x_{t-1}</code>.</p>
 
                 <p>We show the iterative denoising of a noisy image <code>x_690</code>.</p>
 
@@ -92,21 +89,67 @@
 
             <h3>1.5 Diffusion Model Sampling</h3>
 
-                <p>We sample an image from our iterative denoising process by passing in a pure-noise image with timestep <code>t=990</code>. (We also pass in the default text prompt.)</p>
+                <p>We sample an image from our denoising process by passing in a pure-noise image with timestep <code>t=990</code>. (We also pass in the default text prompt.)</p>
 
                 <span>samples</span>
 
             <h3>1.6 Diffusion Model Sampling</h3>
 
-                <p>We improve the quality of our sampled images with "Classifier-Free Guidance". In addition to the default text prompt ("a high quality photo"), we pass in the null prompt ("") to DeepFloyd. For a given <code>x_t</code>, each of our prompts provides a noise estimate. The former prompt provides our conditioned estimate <code>err_c</code>; the latter prompt provides our unconditioned estimate <code>err_u</code>.</p>
+                <p>We improve the quality of our sampled images with "Classifier-Free Guidance". In addition to the default text prompt ("a high quality photo"), we pass in the null prompt ("") to DeepFloyd. For a given <code>x_t</code>, each of our prompts provides a noise estimate. The former prompt is a "condition prompt" that provides our conditioned estimate <code>err_c</code>; the latter prompt is an "unconditioned prompt" provides our unconditioned estimate <code>err_u</code>.</p>
 
-                <p>For some value <code>gamma &gt; 1</code>, we compute <code>err = err_u + gamma * (err_c - err_u)</code>. Note that <code>err</code> is essentially a weighted average in which <code>err_c</code> receives highly positive weight and <code>err_u</code> receives negative weight; in other words, <code>err</code> is a more extreme version of <code>err_c</code>. We use <code>err</code> in our subsequent computation of <code>x_{t-30}.</code>
+                <p>For some value <code>gamma &gt; 1</code>, we compute <code>err = err_u + gamma * (err_c - err_u)</code>. Note that <code>err</code> is essentially a weighted average in which <code>err_c</code> receives highly positive weight and <code>err_u</code> receives negative weight; informally, <code>err</code> is a more extreme version of <code>err_c</code>. We use <code>err</code> in our subsequent computation of <code>x_{t-30}.</code>
 
-                <p>Now we sample images from our CFG-enhanced iterative denoised process. We use the value <code>gamma = 7</code>.</p>
+                <p>Now we sample images from our CFG-enhanced denoising process. We use the value <code>gamma = 7</code>.</p>
 
                 <span>samples</span>
 
+            <h3>1.7 Image-to-Image Translation</h3>
+
+                <p>By providing the noisy version of a clean image to our denoising process, we obtain an output image that resembles the clean input with some random changes. For large <code>t</code> (e.g. <code>st[1]=960</code>), the output will have very little connection to the input; for small <code>t</code> (e.g. <code>st[20]=330</code>), the output will closely resemble the input.</p>
+
+                <p>We use two real-life images as our clean inputs. For each image, we add noise to it according to a varying initial timestep and pass it into the denoising process.</p>
+
+                <span>plushies</span>
+                <span>view</span>
+            
+            <h3>1.7.1 More Images</h3>
+
+                <p>We also perform image-to-image translations with web images and drawn images.</p>
+
+
+            <h3>1.7.2 Inpainting</h3>
+
+                <p>For our image of the Campanile and our two web images, we define the "masks" below.</p>
+
+                <span>masks</span>
+                
+                <p>We can modify the denoising process so that it produces outputs with changes in the masked areas only. Then we execute the denoising process (with initial timestep <code>st[0]=990</code>, in order to maximize the changes in the masked areas).</p>
+
+                <span>inpaintings - provide multiple?</span>
+
+            <h3>1.7.3 Text-Conditioned Image-to-Image Translation</h3>
+                
+                <p>Observe that performing image-to-image translation with a high initial timestep yields a highly random output. We can reduce this randomness by replacing our generic condition prompt with a more specific condition prompt. (The unconditioned prompt stays the same.)</p>
+
+                <span>results</span>
+
+            <h3>1.8 Visual Anagrams</h3>
+
+                <p>In this section and section 1.9, we produce visually interesting results by providing our denoising process with multiple condition prompts.</p>
+
+                <p>A "visual anagram" depicts different things when viewed right-side-up and upside-down. To generate a visual anagram, we need a condition prompt for the right-side-up view and a condition prompt for the upside-down view.</p>
+
+                <p>We execute our denoising process with a high initial timestep and an input of pure noise. For each (strided) iteration of the denoising process, we get a noise estimate <code>err_1</code> for the current <code>x_t</code> with our right-side-up prompt and a noise estimate <code>err_2</code> with our upside-down prompt. The weighted average <code>err = w * err_1 + (1 - w) * err_2</code> (for <code>0 &lt; w &lt; 1</code>) is used to compute <code>x_{t-30}</code>.</p> (Computing <code>err_2</code> requires us to flip <code>x_t</code> beforehand.)</p>
+
+            <h3>1.9 Hybrid Images</h3>
+
+                <p>A "hybrid image" depicts different things when viewed close-up and far-away. The close-up view relies on high-frequency features of the image, and the far-away view relies on low-frequency features. To generate a hybrid image, we need a condition prompt for the high-frequency features and a condition prompt for the low-frequency features.</p>
+
+                <p></p>
+
         <h2>Part B: Diffusion Models From Scratch</h2>
+
+                
 
  </body>
  </html>
