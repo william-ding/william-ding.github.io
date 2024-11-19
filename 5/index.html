@@ -27,7 +27,86 @@
 
         <h2>Part A: Using Diffusion Models</h2>
 
+
+            <h3>The DeepFloyd Model</h3>
+
+                <p>Part A of this project relies on the DeepFloyd IF diffusion model, which is available on Hugging Face. The first stage of DeepFloyd IF takes a text prompt and outputs a 64x64 color image; the second stage upscales the image to 256x256.</p>
+
+                <p>We call both stages of the model on three text prompts, as seen below. We can vary the number of inference steps of each stage of the model; increasing the number of inference steps increases the required computation.</p>
+
+                <span>20</span>
+                <span>5</span>
+                <span>40</span>
+
+                <p>(I used a random seed of 18,000.)</p>
+
+                <p>For <code>num_inference_steps=20</code> (the recommended value), the first stage generates a reasonable 64x64 image for each of the three prompts, and the second stage does a great job of upscaling. The output images appear slightly more high-contrast than real life; for example, the neon-green portion of the rocket is slightly unrealistic.</p>
+
+                <p>For <code>num_inference_steps=5</code>, the 64x64 image for "a rocket ship" is nonsensical. Furthermore, the second stage does a poor job of upscaling the 64x64 image for "a man wearing a hat".
+                </p>
+
+                <p>For <code>num_inference_steps=40</code>, the first and second stages perform well, though their tendency to generate high-contrast images is increased.</p>
+
+
+            <h3>1.1 The Forward Process</h3>
+
+                <p>A diffusion model works by iteratively removing noise from a noisy image until it arrives at a "clean" output image. We can start with an image of full noise, or with a noisy version of an input image. In the latter case, the "forward process" of a diffusion model adds noise to a clean input.</p>
+
+                <p>Given a clean image <code>x_0</code> and a timestep <code>t</code>, we compute the noisy image <code>x_t</code> as a linear combination of <code>x_0</code> and <code>epsilon</code>, where <code>epsilon</code> is a standard-normal image (in other words, an image of pure noise). For greater values of <code>t</code>, the contribution of <code>epsilon</code> is increased.</p>
+
+                <p>We compute <code>x_t</code> for <code>t = [250, 500, 750]</code>. Our input <code>x_0</code> is a clean image of the Campanile.</p>
+
+                <span>x_0</span>
+
+                <span>x_t</span>
+
+
+
+            <h3>1.2 Classical Denoising</h3>
+
+                <p>A simple way to remove noise from an image is to blur it. We apply a Gaussian blur filter (with a kernel size of 13) to each <code>x_t</code>.</p>
+
+                <span>denoised</span>
+            
+            <h3>1.3 One-step Denoising</h3>
+
+                <p>A better way to remove noise from an image is to pass it into a denoising UNet model. DeepFloyd provides a trained denoising UNet.</p>
+
+                <span>denoised</span>
+
+            
+            <h3>1.4 Iterative Denoising</h3>
+
+                <p>The UNet performs worse on highly noisy inputs, which makes sense. But a diffusion model can denoise an input with any amount of noise. In particular, DeepFloyd can denoise an image with any amount of noise from <code>t=0</code> (no noise) to <code>t=1000</code> (entirely noise).</p>
+
+                <p>For a noisy image <code>x_t</code>, DeepFloyd provides a noise estimate <code>err</code> and a scalar constant <code>alpha_cumprod_t</code> that can be used to obtain <code>x_{t-1}</code>. Over hundreds of iterations, we can transform <code>x_t</code> into a clean image <code>x_0</code>.</p>
+
+                <p>(To compute the estimated noise of <code>x_t</code>, DeepFloyd must receive an embedded text prompt that describes the desired <code>x_0</code>. By default, we supply the text prompt "a high quality photo".)</p>
+
+                <p>Iterating hundreds of times is costly. We define a sequence of "strided timesteps" in which each strided timestep corresponds to 30 canonical timesteps. In particular, we have <code>st[0]=990, st[1]=960, ..., st[33]=0</code>. We use a modified denoising formula to iterate over strided timesteps instead of canonical timesteps.</p>
+
+                <p>We show the iterative denoising of a noisy image <code>x_690</code>.</p>
+
+                <span>progression</span>
+                <span>result comparison</span>
+
+            <h3>1.5 Diffusion Model Sampling</h3>
+
+                <p>We sample images from our iterative denoising process by passing in a pure-noise image with timestep <code>t=990</code>. (We also pass in the default text prompt.)</p>
+
+                <span>samples</span>
+
+            <h3>1.6 Diffusion Model Sampling</h3>
+
+                <p>We improve the quality of our sampled images with "Classifier-Free Guidance". In addition to the default text prompt ("a high quality photo"), we pass in the null prompt ("") to DeepFloyd. For a given <code>x_t</code>, each of our prompts provides a noise estimate. The former prompt provides our conditioned estimate <code>err_c</code>; the latter prompt provides our unconditioned estimate <code>err_u</code>.</p>
+
+                <p>For some value <code>gamma &gt; 1</code>, we compute <code>err = err_u + gamma * (err_c - err_u). Note that <code>err</code> is essentially a weighted average in which <code>err_c</code> receives highly positive weight and <code>err_u</code> receives negative weight; in other words, <code>err</code> is a more extreme version of <code>err_c</code>. We use <code>err</code> in our subsequent computation of <code>x_{t-30}.</code>
+
+                <p>We sample images from our CFG-enhanced iterative denoised process. We use the value <code>gamma = 7</code>.</p>
+
+                <span>samples</span>
+
         <h2>Part B: Diffusion Models From Scratch</h2>
-        
+
  </body>
  </html>
