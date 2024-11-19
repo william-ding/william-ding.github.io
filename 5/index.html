@@ -32,7 +32,7 @@
 
                 <p>Part A of this project relies on the DeepFloyd IF diffusion model, which is available on Hugging Face. The first stage of DeepFloyd IF takes a text prompt and outputs a 64x64 color image; the second stage upscales the image to 256x256.</p>
 
-                <p>We call both stages of the model on three text prompts, as seen below. We can vary the number of inference steps of each stage of the model; increasing the number of inference steps increases the required computation.</p>
+                <p>We call both stages of the model on three text prompts, as seen below. We vary the number of inference steps of each stage of the model; increasing the number of inference steps increases the required computation.</p>
 
                 <span>20</span>
                 <span>5</span>
@@ -50,7 +50,7 @@
 
             <h3>1.1 The Forward Process</h3>
 
-                <p>A diffusion model works by iteratively removing noise from a noisy image until it arrives at a "clean" output image. We can start with an image of full noise, or with a noisy version of an input image. In the latter case, the "forward process" of a diffusion model adds noise to a clean input.</p>
+                <p>A diffusion model works by iteratively removing noise from a noisy image until it arrives at a "clean" output image. The model starts with an image of pure noise or with a noisy version of a clean image. In the latter case, the "forward process" of a diffusion model adds noise to the clean image.</p>
 
                 <p>Given a clean image <code>x_0</code> and a timestep <code>t</code>, we compute the noisy image <code>x_t</code> as a linear combination of <code>x_0</code> and <code>epsilon</code>, where <code>epsilon</code> is a standard-normal image (in other words, an image of pure noise). For greater values of <code>t</code>, the contribution of <code>epsilon</code> is increased.</p>
 
