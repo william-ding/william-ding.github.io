@@ -145,7 +145,9 @@
 
             <h3>1.9 Hybrid Images</h3>
 
-                <p>A "hybrid image" depicts different things when viewed close-up and far-away. The close-up view relies on high-frequency features of the image, and the far-away view relies on low-frequency features. To generate a hybrid image, we need a condition prompt for the high-frequency features of our desired image and a condition prompt for the low-frequency features.</p>
+                <p>A "hybrid image" depicts different things when viewed close-up and far-away. The far-away view relies on low-frequency features of the image, and the close-up view relies on high-frequency features. To generate a hybrid image, we need a condition prompt for its low-frequency features and a condition prompt for its high-frequency features.</p>
+
+                <p>As with visual anagrams, we generate hybrid images by combining our noise estimates <code>err_1</code>, <code>err_2</code> for <code>x_t</code> in each (strided) iteration of the denoising process. For hybrid images, we have <code>err = low_freq(err_1) + high_freq(err_2)</code>, where <code>low_freq</code> is the Gaussian blur filter and <code>high_freq</code> is its complement.</p>
 
                 <span>hybrid images</span>
 
