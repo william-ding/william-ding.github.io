@@ -262,11 +262,15 @@
                     
                 <p>We test the following epochs of the time-conditional UNet:</p>
 
-                <span>todo</span>
+                <img src="media/b/part2_tc_epoch1.png" alt="img" width="auto" height="200">
+                <img src="media/b/part2_tc_epoch5.png" alt="img" width="auto" height="200">
+                <img src="media/b/part2_tc_epoch10.png" alt="img" width="auto" height="200">
+                <img src="media/b/part2_tc_epoch15.png" alt="img" width="auto" height="200">
+                <img src="media/b/part2_tc_epoch20.png" alt="img" width="auto" height="200">
 
-                <p>The test results of the time-conditional UNet have many artefacts and do not always resemble actual digits. We improve on our time-conditional UNet by modifying its architecture to support a third parameter <code>c</code>: a one-hot encoding that represents a particular digit from 0 to 9. The value for <code>c</code> enters the "class-conditional" UNet at the same modules as <code>t</code>.</p>
+                <p>The test results of the time-conditional UNet have many artefacts and do not always resemble actual digits. We improve on our time-conditional UNet by modifying its architecture to support a third parameter <code>c</code>, a one-hot encoding that represents a particular digit from 0 to 9. The value for <code>c</code> enters the "class-conditional" UNet at the same modules as <code>t</code>.</p>
 
-                During training, we pass in the encoded label of clean image <code>x_0</code> as the value for <code>c</code>. (To ensure the class-conditional UNet supports arbitrary generation in addition to class-specific generation, we randomly "zero out" 10% of the one-hot encodings.) Otherwise, the training the class-conditional UNet is identical to training of the time-conditional UNet.
+                During training, we pass in the encoded label of clean image <code>x_0</code> as the value for <code>c</code>. (To ensure the class-conditional UNet supports arbitrary generation in addition to class-specific generation, we randomly "zero out" 10% of the encodings.) Otherwise, training the class-conditional UNet is identical to training the time-conditional UNet.
 
                 <p>We get the following training losses for the class-conditional UNet:</p>
 
@@ -276,7 +280,11 @@
 
                 <p>We test the following epochs of the class-conditional UNet:</p>
 
-                <span>todo</span>
+                <img src="media/b/part2_cc_epoch1.png" alt="img" width="auto" height="200">
+                <img src="media/b/part2_cc_epoch5.png" alt="img" width="auto" height="200">
+                <img src="media/b/part2_cc_epoch10.png" alt="img" width="auto" height="200">
+                <img src="media/b/part2_cc_epoch15.png" alt="img" width="auto" height="200">
+                <img src="media/b/part2_cc_epoch20.png" alt="img" width="auto" height="200">
 
                 <p>We can see that the class-conditional UNet generates images of far better quality than the time-conditional UNet.</p>
 
