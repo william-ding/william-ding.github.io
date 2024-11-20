@@ -188,17 +188,31 @@
                 <p>As with visual anagrams, we generate hybrid images by combining our noise estimates <code>err_1</code>, <code>err_2</code> for <code>x_t</code> in each (strided) iteration of the denoising process. For hybrid images, we have <code>err = low_freq(err_1) + high_freq(err_2)</code>, where <code>low_freq</code> is a Gaussian blur filter (with kernel size of 33, sigma of 2) and <code>high_freq</code> is its complement.</p>
 
                 <img src="media/a/part1-9_waterfall1.png" alt="img" width="auto" height="100">
-                <p class="caption">Hybrid images with far-away prompt "a lithograph of a skull" and close-up prompt ""a lithograph of waterfalls".</p>
+                <p class="caption">A hybrid image with far-away prompt "a lithograph of a skull" and close-up prompt ""a lithograph of waterfalls".</p>
 
                 <img src="media/a/part1-9_rocket1.png" alt="img" width="auto" height="100">
-                <p class="caption">Far-away prompt: "a pencil". Close-up prompt: "a rocket ship".</p>
+                <p class="caption">Far-away: "a pencil". Close-up: "a rocket ship".</p>
 
                 <img src="media/a/part1-9_fish1.png" alt="img" width="auto" height="100">
-                <p class="caption">Far-away prompt: "a lithograph of planet earth". Close-up prompt: "a lithograph of blue and green fishes".</p>
+                <p class="caption">Far-away: "a lithograph of planet earth". Close-up: "a lithograph of blue and green fishes".</p>
 
         <h2>Part B: Diffusion Models From Scratch</h2>
 
-                
+            In the second part of this project, we create a diffusion model that generates images which resemble digits in the <a href="https://pytorch.org/vision/stable/generated/torchvision.datasets.MNIST.html">MNIST</a> database.
+
+            Part 1: Single-Step Denoising via UNet
+
+                Our overall goal is to generate MNIST-like images from images of pure noise. An intermediate step is to train a UNet that cleans up noisy versions of MNIST images.
+
+                We implement a UNet with the following architecture, as seen in the project spec. Unlike a diffusion model, which removes noise from an image over the course of many iterations, the UNet is designed to denoise an image in a single iteration.
+
+                We obtain training data for the UNet, we modify datapoints from the MNIST dataset. Each MNIST datapoint consists of a 28x28 image of a handwritten digit and a label indicating its value.
+
+                To add noise to a clean image, we use the following formula: <code>z = x + delta * epsilon</code>, where <code>x</code> is the clean image, <code>delta</code> is a scalar constant, and <code>epsilon</code> is standard-normal noise. Each <code>(z, x)</code> pair serves as a training datapoint for the UNet; given <code>z</code>, the UNet should recover <code>x</code>. For now, we ignore the original labels of the MNIST dataset.
+
+                Our noising process produces the following results for various values of <code>delta</code>:
+
+                <img src="media/b/part1_noising.png" alt="img" width="auto" height="400">
 
  </body>
  </html>
