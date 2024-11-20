@@ -125,27 +125,37 @@
                 <p>We use the Campanile image and two other real-life images as our clean inputs. For each image, we add noise to it according to a varying initial timestep and pass it into the denoising process.</p>
 
                 <img src="media/a/part1-7_test.png" alt="img" width="auto" height="300">
-
+                <p class="caption">Top: For <code>i = [1, 3, 5, 7, 10, 20]</code>, the result of image-to-image translation with initial timestep <code>st[i]</code> and the Campanile image as input.</p>
+                <p class="caption">Middle: Image-to-image translations with <code>plushies.jpg</code>.</p>
+                <p class="caption">Bottom: Image-to-image translations with <code>view.jpg</code>.</p>
+                
             <h3>1.7.1 More Images</h3>
 
                 <p>We also perform image-to-image translations with web images and drawn images.</p>
 
                 <img src="media/a/part1-7_web.png" alt="img" width="auto" height="200">
+                <p class="caption">Top: Image-to-image translations with <a href="https://goodsmileshop.com/medias/sys_master/images/images/h6a/h56/9510882508830.jpg">Ky</a>, a character from the <i>Guilty Gear</i> franchise.</p>
+                <p class="caption">Bottom: Image-to-image translations with <a href="https://fumo.website/img/001.jpg">Reimu</a>, a character from the <i>Touhou</i> franchise.</p>
 
                 <img src="media/a/part1-7_drawn.png" alt="img" width="auto" height="200">
-
+                <p class="caption">Top: Image-to-image translations with a smiley face.</p>
+                <p class="caption">Bottom: Image-to-image translations with a purple smiley face.</p>
 
             <h3>1.7.2 Inpainting</h3>
 
                 <p>For our image of the Campanile and our two web images, we define rectangular "masks". We can modify the denoising process so that it produces outputs with changes in the masked areas only. Then we execute the denoising process (with initial timestep <code>st[0]=990</code>, in order to maximize the changes in the masked areas).</p>
 
                 <img src="media/a/part1-7_inpainting.png" alt="img" width="auto" height="300">
+                <p class="caption">Inpainting masks and results for the Campanile, Ky, and Reimu images.</p>
 
             <h3>1.7.3 Text-Conditioned Image-to-Image Translation</h3>
                 
                 <p>Observe that performing image-to-image translation with a high initial timestep yields a highly random output. We can reduce this randomness by replacing our generic condition prompt with a more specific condition prompt. (The unconditioned prompt stays the same.)</p>
 
                 <img src="media/a/part1-7_condition.png" alt="img" width="auto" height="300">
+                <p class="caption">Top: Image-to-image translations with the Campanile image. The condition prompt is "a rocket ship".</p>
+                <p class="caption">Middle: Image-to-image translations with Ky. Prompt: "a photo of a dog".</p>
+                <p class="caption">Bottom: Image-to-image translations with Reimu. Prompt: "a man with a hat".</p>
 
             <h3>1.8 Visual Anagrams</h3>
 
