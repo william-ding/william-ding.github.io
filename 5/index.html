@@ -254,9 +254,13 @@
 
                 <p>We train over twenty epochs of the training portion of MNIST. We use a batch size of 128, a hidden dimension of <code>D = 64</code>, and an Adam optimizer with an initial learning rate of <code>1e-3</code> that decays exponentially to <code>1e-4</code></p>.
 
-                <p>We obtain the following training losses for the time-conditional UNet:</p>
+                <p>We get the following training losses for the time-conditional UNet:</p>
 
                 <img src="media/b/part2_training_losses_TC.png" alt="img" width="auto" height="400">
+
+                <p>Once the time-conditional UNet has finished training, we test it (in other words, we perform "sampling") by iteratively removing noise from a pure-noise image. Each call to the time-conditional UNet constitutes a single timestep, so we need 300 calls to arrive at a clean image.</p>
+                    
+                <p>We test the first, fifth, 15th, and 20th epochs of the time-conditional UNet.</p>
 
  </body>
  </html>
