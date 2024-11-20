@@ -166,14 +166,17 @@
                 <p>We execute our denoising process with a high initial timestep and an input of pure noise. For each (strided) iteration of the denoising process, we get a noise estimate <code>err_1</code> for the current <code>x_t</code> with our right-side-up prompt and a noise estimate <code>err_2</code> with our upside-down prompt. The weighted average <code>err = w * err_1 + (1 - w) * err_2</code> (for <code>0 &lt; w &lt; 1</code>) is used to compute <code>x_{t-30}</code>. Note that computing <code>err_2</code> requires us to flip <code>x_t</code> beforehand. The weight <code>w</code> is determined by trial and error.</p>
                 
                 <img src="media/a/part1-8_campfire.png" alt="img" width="auto" height="100">
+                <br>
                 <img src="media/a/part1-8_man.png" alt="img" width="auto" height="100">
                 <p class="caption">A visual anagram with right-side-up prompt "an oil painting of people around a campfire", upside-down prompt "an oil painting of an old man", and weight <code>w=0.7</code>.</p>
 
                 <img src="media/a/part1-8_chocolate.png" alt="img" width="auto" height="100">
+                <br>
                 <img src="media/a/part1-8_dog.png" alt="img" width="auto" height="100">
                 <p class="caption">Prompts: "an oil painting of chocolate pieces", "an oil painting of a brown dog". Weight: <code>w=0.7</code>.</p>
 
                 <img src="media/a/part1-8_snow.png" alt="img" width="auto" height="100">
+                <br>
                 <img src="media/a/part1-8_coast.png" alt="img" width="auto" height="100">
                 <p class="caption">Prompts: "an oil painting of a snowy mountain village", "a photo of the amalfi cost" [sic]. Weight: <code>w=0.75</code>.</p>
                 
