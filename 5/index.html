@@ -298,5 +298,8 @@
 
                 <p>We can see that the class-conditional UNet generates images of far better quality than the time-conditional UNet.</p>
 
+            <h3>B&W: Sampling GIFs</h3>
+
+                <p>During every tenth sampling timestep, we record the current value of <code>x_t</code>. This lets us create 31-frame GIFs that animate (in reverse) the sampling process for selected epochs of the time-conditional UNet, as seen above. We do the same for selected epochs of the class-conditional UNet. (I used <a href="ezgif.com/maker">ezgif.com/maker</a> to assemble still frames into GIFs.)
  </body>
  </html>
