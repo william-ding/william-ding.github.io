@@ -57,7 +57,7 @@
 
                 <p>A diffusion model works by iteratively removing noise from a noisy image until it arrives at a "clean" output image. The model starts with an image of pure noise or with a noisy version of a clean image. In the latter case, a "forward process" adds noise to the clean image before it is provided to the diffusion model.</p>
 
-                <p>Given a clean image <code>x_0</code> and a timestep <code>t</code>, we compute the noisy image <code>x_t</code> as a linear combination of <code>x_0</code> and <code>epsilon</code>, where <code>epsilon</code> is a standard-normal image (in other words, an image of pure noise). For greater values of <code>t</code>, the contribution of <code>epsilon</code> is increased.</p>
+                <p>Given a clean image <code>x_0</code> and a timestep <code>t</code>, we compute the noisy image <code>x_t</code> as a linear combination of <code>x_0</code> and <code>epsilon</code>, where <code>epsilon</code> is an image of pure noise. For greater values of <code>t</code>, the contribution of <code>epsilon</code> is increased.</p>
 
                 <p>We compute <code>x_t</code> for <code>t = [250, 500, 750]</code>. Our input <code>x_0</code> is a clean image of the Campanile.</p>
 
@@ -143,14 +143,14 @@
 
             <h3>1.7.2 Inpainting</h3>
 
-                <p>For our image of the Campanile and our two web images, we define rectangular "masks". We can modify the denoising process so that it produces outputs with changes in the masked areas only. Then we execute the denoising process (with initial timestep <code>st[0]=990</code>, in order to maximize the changes in the masked areas).</p>
+                <p>For our image of the Campanile and our two web images, we define rectangular "masks". We can modify the denoising process so that it produces outputs with changes in the masked areas only. Then we execute the denoising process. We choose an initial timestep of <code>st[0]=990</code> in order to maximize the changes in the masked areas.</p>
 
                 <img src="media/a/part1-7_inpainting.png" alt="img" width="auto" height="300">
                 <p class="caption">Inpainting masks and results for the Campanile, Ky, and Reimu images.</p>
 
             <h3>1.7.3 Text-Conditioned Image-to-Image Translation</h3>
                 
-                <p>Observe that performing image-to-image translation with a high initial timestep yields a highly random output. We can reduce this randomness by replacing our generic condition prompt with a more specific condition prompt. (The unconditioned prompt stays the same.)</p>
+                <p>Observe that performing image-to-image translation with a high initial timestep yields a highly random output. We can reduce this randomness by replacing our generic condition prompt with a more specific condition prompt. The unconditioned prompt stays the same.</p>
 
                 <img src="media/a/part1-7_condition.png" alt="img" width="auto" height="300">
                 <p class="caption">Top: Image-to-image translations with the Campanile image. The condition prompt is "a rocket ship".</p>
@@ -163,7 +163,7 @@
 
                 <p>A "visual anagram" depicts different things when viewed right-side-up and upside-down. To generate a visual anagram, we need a condition prompt for the right-side-up view and a condition prompt for the upside-down view.</p>
 
-                <p>We execute our denoising process with a high initial timestep and an input of pure noise. For each (strided) iteration of the denoising process, we get a noise estimate <code>err_1</code> for the current <code>x_t</code> with our right-side-up prompt and a noise estimate <code>err_2</code> with our upside-down prompt. The weighted average <code>err = w * err_1 + (1 - w) * err_2</code> (for <code>0 &lt; w &lt; 1</code>) is used to compute <code>x_{t-30}</code>.</p> (Computing <code>err_2</code> requires us to flip <code>x_t</code> beforehand.)</p>
+                <p>We execute our denoising process with a high initial timestep and an input of pure noise. For each (strided) iteration of the denoising process, we get a noise estimate <code>err_1</code> for the current <code>x_t</code> with our right-side-up prompt and a noise estimate <code>err_2</code> with our upside-down prompt. The weighted average <code>err = w * err_1 + (1 - w) * err_2</code> (for <code>0 &lt; w &lt; 1</code>) is used to compute <code>x_{t-30}</code>. Note that computing <code>err_2</code> requires us to flip <code>x_t</code> beforehand.</p>
 
                 <span>visual anagrams</span>
 
