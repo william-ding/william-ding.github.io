@@ -111,7 +111,7 @@
 
                 <p>We improve the quality of our sampled images with "Classifier-Free Guidance". In addition to the default text prompt ("a high quality photo"), we pass in the null prompt ("") to DeepFloyd. For a given <code>x_t</code>, each of our prompts provides a noise estimate. The former prompt is a "condition prompt" that provides our conditioned estimate <code>err_c</code>; the latter prompt is an "unconditioned prompt" that provides our unconditioned estimate <code>err_u</code>.</p>
 
-                <p>For some value <code>gamma &gt; 1</code>, we compute <code>err = err_u + gamma * (err_c - err_u)</code>. Note that <code>err</code> is essentially a weighted average in which <code>err_c</code> receives highly positive weight and <code>err_u</code> receives negative weight; informally, <code>err</code> is a more extreme version of <code>err_c</code>. We use <code>err</code> in our subsequent computation of <code>x_{t-30}.</code>
+                <p>For some value <code>gamma &gt; 1</code>, we compute <code>err = err_u + gamma * (err_c - err_u)</code>. Note that <code>err</code> is essentially a weighted average in which <code>err_c</code> receives highly positive weight and <code>err_u</code> receives negative weight; informally, <code>err</code> is a more extreme version of <code>err_c</code>. We use <code>err</code> in our subsequent computation of <code>x_{t-30}.</code></p>
 
                 <p>Now we sample images from our CFG-enhanced denoising process. We use the value <code>gamma = 7</code>.</p>
 
@@ -199,7 +199,7 @@
 
                 <img src="media/a/part1-9_fish1.png" alt="img" width="auto" height="100">
                 <br>
-                <img src="media/a/part1-8_fish2.png" alt="img" width="auto" height="100">
+                <img src="media/a/part1-9_fish2.png" alt="img" width="auto" height="100">
                 <p class="caption">Far-away prompt: "a lithograph of planet earth". Close-up prompt: "a lithograph of blue and green fishes".</p>
 
         <h2>Part B: Diffusion Models From Scratch</h2>
