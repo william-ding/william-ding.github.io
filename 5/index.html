@@ -188,7 +188,7 @@
                 <p>As with visual anagrams, we generate hybrid images by combining our noise estimates <code>err_1</code>, <code>err_2</code> for <code>x_t</code> in each (strided) iteration of the denoising process. For hybrid images, we have <code>err = low_freq(err_1) + high_freq(err_2)</code>, where <code>low_freq</code> is a Gaussian blur filter (with kernel size of 33, sigma of 2) and <code>high_freq</code> is its complement.</p>
 
                 <img src="media/a/part1-9_waterfall1.png" alt="img" width="auto" height="100">
-                <p class="caption">A hybrid image with far-away prompt "a lithograph of a skull" and close-up prompt ""a lithograph of waterfalls".</p>
+                <p class="caption">A hybrid image with far-away prompt "a lithograph of a skull" and close-up prompt "a lithograph of waterfalls".</p>
 
                 <img src="media/a/part1-9_rocket1.png" alt="img" width="auto" height="100">
                 <p class="caption">Far-away: "a pencil". Close-up: "a rocket ship".</p>
@@ -200,7 +200,7 @@
 
                 <p>We can use our CFG-enhanced denoising process to generate images from scratch by denoising pure-noise images, as seen in 1.6. Furthermore, we can control the outputted images with a condition prompt, as suggested by 1.7.3.</p>
 
-                <p>To generate a "course logo", I tried many condition prompts with the goal of creating an appealing image of a computer with eyes. I eventually settled on these five prompts:</p>
+                <p>To generate a course logo, I tried many condition prompts with the goal of creating an appealing image of a computer with eyes. I eventually settled on these five prompts:</p>
 
                 <ul>
                     <li>'vector art of computer monitor displaying digital eyes'</li>
@@ -267,7 +267,7 @@
 
                 <img src="media/b/part2_unet.png" alt="img" width="auto" height="300">
 
-                <p>For training and testing our diffusion model, we employ the "forwarding" and "sampling" approach of <a href="https://arxiv.org/abs/2006.11239">DDPM</a> models. Under this approach, our "time-conditional" UNet no longer tries to estimate the clean version of an input noisy image; instead, it tries to estimate the error of the noisy image. This is a minor change, but it is helpful during forwarding.</p>
+                <p>For training and testing our diffusion model, we employ the "forwarding" and "sampling" approach of <a href="https://arxiv.org/abs/2006.11239">DDPM</a> models. Under this approach, our "time-conditional" UNet no longer estimates the clean version of an input noisy image; instead, it estimates the error of the noisy image. This is a minor change, but it is helpful during forwarding.</p>
 
                 <p>To train the time-conditional UNet, we first precompute the DDPM values <code>(alpha_t, beta_t, alpha_cumprod_t)</code> for each timestep <code>0 &le; t &le; 300</code>. Then we repeatedly select random clean images <code>x_0</code> from the training portion of MNIST, random standard-normal errors <code>epsilon</code>, and random timesteps <code>1 &le; t &le; 300</code>. For each <code>(x_0, epsilon, t)</code> triplet, we compute a noisy image <code>x_t</code>. Passing <code>(x_t, t)</code> into the time-conditional UNet yields an estimate for <code>epsilon</code>, which is compared to the true value. (This repeated process is the "forwarding" of a DDPM model.)</p>
 
