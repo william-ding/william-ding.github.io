@@ -262,11 +262,16 @@
                     
                 <p>We test the following epochs of the time-conditional UNet:</p>
 
-                <img src="media/b/part2_tc_epoch1.png" alt="img" width="auto" height="200">
-                <img src="media/b/part2_tc_epoch5.png" alt="img" width="auto" height="200">
-                <img src="media/b/part2_tc_epoch10.png" alt="img" width="auto" height="200">
-                <img src="media/b/part2_tc_epoch15.png" alt="img" width="auto" height="200">
-                <img src="media/b/part2_tc_epoch20.png" alt="img" width="auto" height="200">
+                <img src="media/b/timecond_epoch1.gif" alt="img" width="auto" height="200">
+                <p class="caption">Epoch 1</p>
+                <img src="media/b/timecond_epoch5.gif" alt="img" width="auto" height="200">
+                <p class="caption">Epoch 5</p>
+                <img src="media/b/timecond_epoch10.gif" alt="img" width="auto" height="200">
+                <p class="caption">Epoch 10</p>
+                <img src="media/b/timecond_epoch15.gif" alt="img" width="auto" height="200">
+                <p class="caption">Epoch 15</p>
+                <img src="media/b/timecond_epoch20.gif" alt="img" width="auto" height="200">
+                <p class="caption">Epoch 20</p>
 
                 <p>The test results of the time-conditional UNet have many artefacts and do not always resemble actual digits. We improve on our time-conditional UNet by modifying its architecture to support a third parameter <code>c</code>, a one-hot encoding that represents a particular digit from 0 to 9. The value for <code>c</code> enters the "class-conditional" UNet at the same modules as <code>t</code>.</p>
 
@@ -276,15 +281,20 @@
 
                 <img src="media/b/part2_training_losses_CC.png" alt="img" width="auto" height="400">
 
-                <p>Testing the class-conditional UNet is likewise similar to testing the time-conditional UNet. In our testing, we pass in specific values for <code>c</code> to ensure the class-conditional UNet supports class-specific generation.</p>
+                <p>Testing the class-conditional UNet is likewise similar to testing the time-conditional UNet. In our testing, we pass in specific values for <code>c</code> to verify that the class-conditional UNet supports class-specific generation.</p>
 
                 <p>We test the following epochs of the class-conditional UNet:</p>
 
                 <img src="media/b/part2_cc_epoch1.png" alt="img" width="auto" height="200">
+                <p class="caption">Epoch 1</p>
                 <img src="media/b/part2_cc_epoch5.png" alt="img" width="auto" height="200">
+                <p class="caption">Epoch 5</p>
                 <img src="media/b/part2_cc_epoch10.png" alt="img" width="auto" height="200">
+                <p class="caption">Epoch 10</p>
                 <img src="media/b/part2_cc_epoch15.png" alt="img" width="auto" height="200">
+                <p class="caption">Epoch 15</p>
                 <img src="media/b/part2_cc_epoch20.png" alt="img" width="auto" height="200">
+                <p class="caption">Epoch 20</p>
 
                 <p>We can see that the class-conditional UNet generates images of far better quality than the time-conditional UNet.</p>
 
