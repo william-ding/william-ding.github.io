@@ -218,7 +218,7 @@
 
                 <p>In practice, all of our training datapoints have <code>delta=0.5</code> noise, under the assumption that a thoroughly-trained UNet will be able to denoise images with other amounts of noise.</p>
 
-                <p>Our modified training data contains 60,000 datapoints. We train the UNet over 5 epochs with a batch size of 256, a hidden dimension of <code>D = 128</code>, and an Adam optimizer with learning rate <code>1e-4</code>. Our loss function computes the squared error between each outputted image and its corresponding true clean image.</p>
+                <p>Our modified training data contains 60,000 datapoints. We train the UNet over five epochs with a batch size of 256, a hidden dimension of <code>D = 128</code>, and an Adam optimizer with learning rate <code>1e-4</code>. Our loss function computes the squared error between each outputted image and its corresponding true clean image.</p>
 
                 <p>We get the following training losses:</p>
 
@@ -239,8 +239,24 @@
 
                 <img src="media/b/part1_outofdistribution.png" alt="img" width="auto" height="200">
 
-                <p class="caption">Top: A MNIST test image noised with <code>delta = 0.0, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0</code>.</p>
+                <p class="caption">Top: A MNIST test image noised with <code>delta = [0.0, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0]</code>.</p>
                 <p class="caption">Bottom: The results of denoising each noised image with the fully-trained UNet.</p>
+
+            <h3>Part 2: Time-Conditional and Class-Conditional Diffusion Models</h3>
+
+                <p>Unlike the UNet, our desired diffusion model must denoise iteratively and must be able to denoise an image according to some input timestep. We modify the original UNet architecture to support a scalar input <code>t</code> that accompanies each input image.</p>
+
+                <img src="media/b/part2_unet.png" alt="img" width="auto" height="300">
+
+                <p>For training and testing our diffusion model, we employ the "forwarding" and "sampling" approach of <a href="https://arxiv.org/abs/2006.11239">DDPM</a> models. Under this approach, our time-conditional UNet no longer tries to estimate the clean version of an input noisy image; instead, it tries to estimate the error of the noisy image. This is a minor change, but it is helpful during forwarding.</p>
+
+                <p>To train the time-conditional UNet, we first precompute the DDPM values <code>(alpha_t, beta_t, alpha_cumprod_t)</code> for each timestep <code>0 &le; t &le; 300</code>. Then we repeatedly select random clean images <code>x_0</code> from the training portion of MNIST, random standard-normal errors <code>epsilon</code>, and random timesteps <code>1 &le; t &le; 300</code>. For each <code>(x_0, epsilon, t)</code> triplet, we compute a noisy image <code>x_t</code>. Passing <code>(x_t, t)</code> into the time-conditional UNet yields an estimate for <code>epsilon</code>, which is compared to the true value. (This repeated process is the "forwarding" of a DDPM model.)</p>
+
+                <p>We train over twenty epochs of the training portion of MNIST. We use a batch size of 128, a hidden dimension of <code>D = 64</code>, and an Adam optimizer with an initial learning rate of <code>1e-3</code> that decays exponentially to <code>1e-4</code></p>.
+
+                <p>We obtain the following training losses for the time-conditional UNet:</p>
+
+                <img src="media/b/part2_training_losses_TC.png" alt="img" width="auto" height="400">
 
  </body>
  </html>
