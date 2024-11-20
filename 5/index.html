@@ -218,7 +218,7 @@
 
                 <p>In practice, all of our training datapoints have <code>delta=0.5</code> noise, under the assumption that a thoroughly-trained UNet will be able to denoise images with other amounts of noise.</p>
 
-                <p>Our modified training data contains 60,000 datapoints. We train the UNet over 5 epochs with a batch size of 256, a hidden dimension of <code>D = 128</code>, and an Adam optimizer with learning rate <code>1e-4</code>.</p>
+                <p>Our modified training data contains 60,000 datapoints. We train the UNet over 5 epochs with a batch size of 256, a hidden dimension of <code>D = 128</code>, and an Adam optimizer with learning rate <code>1e-4</code>. Our loss function computes the squared error between each outputted image and its corresponding true clean image.</p>
 
                 <p>We get the following training losses:</p>
 
@@ -226,11 +226,11 @@
 
                 <p>We generate test datapoints in the same way we generated training datapoints, except we now derive our datapoints from the test portion of MNIST. We test the UNet after each epoch.</p>
 
-                <img src="media/b/part1_epoch1.png" alt="img" width="auto" height="200">
+                <img src="media/b/part1_epoch01.png" alt="img" width="auto" height="200">
                 <p class="caption">Top: Original MNIST images. Middle: With <code>delta=0.5</code> noise. Bottom: Denoised by first-epoch UNet.</p>
 
 
-                <img src="media/b/part1_epoch5.png" alt="img" width="auto" height="200">
+                <img src="media/b/part1_epoch05.png" alt="img" width="auto" height="200">
                 <p class="caption">Top: Original MNIST images. Middle: With <code>delta=0.5</code> noise. Bottom: Denoised by fifth-epoch UNet.</p>
 
                 <p>We can see that the fifth-epoch UNet produces fewer visual artefacts than the first-epoch UNet.</p>
