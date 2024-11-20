@@ -204,16 +204,32 @@
 
                 <p>Our overall goal is to generate MNIST-like images from images of pure noise. An intermediate step is to train a UNet that cleans up noisy versions of MNIST images.</p>
 
-                <p>We implement a UNet with the following architecture, as seen in the project spec. Unlike a diffusion model, which removes noise from an image over the course of many iterations, the UNet is designed to denoise an image in a single iteration.</p>
+                <p>We implement a UNet with the following architecture, as shown in the project spec. Unlike a diffusion model, which removes noise from an image over the course of many iterations, the UNet is designed to denoise an image in a single iteration.</p>
 
-                <p>We obtain training data for the UNet, we modify datapoints from the MNIST dataset. Each MNIST datapoint consists of a 28x28 image of a handwritten digit and a label indicating its value.</p>
+                <img src="media/b/part1_unet.png" alt="img" width="auto" height="500">
 
-                <p>To add noise to a clean image, we use the following formula: <code>z = x + delta * epsilon</code>, where <code>x</code> is the clean image, <code>delta</code> is a scalar constant, and <code>epsilon</code> is standard-normal noise. Each <code>(z, x)</code> pair serves as a training datapoint for the UNet; given <code>z</code>, the UNet should recover <code>x</code>. For now, we ignore the original labels of the MNIST dataset.</p>
+                <p>To obtain training data for the UNet, we modify each datapoint in the training portion of the MNIST dataset. Each MNIST datapoint consists of a 28x28 image of a handwritten digit and a label indicating its value.</p>
+
+                <p>We add noise to a clean MNIST image according to the following formula: <code>z = x + delta * epsilon</code>, where <code>x</code> is the clean image, <code>delta</code> is a scalar constant, and <code>epsilon</code> is standard-normal noise. Each <code>(z, x)</code> pair serves as a training datapoint for the UNet; given <code>z</code>, the UNet should recover <code>x</code>. For now, we ignore the original labels of the MNIST dataset.</p>
 
                 <p>Our noising process produces the following results for various values of <code>delta</code>:</p>
 
                 <img src="media/b/part1_noising.png" alt="img" width="auto" height="400">
 
+                <p>In practice, we generate our training data with <code>delta=0.5</code> only, under the assumption that a thoroughly-trained UNet will be able to handle images with other amounts of noise.</p>
+
+                <p>Our modified training data contains 60,000 datapoints. We train the UNet over 5 epochs with a batch size of 256, a hidden dimension of <code>D = 128</code>, and an Adam optimizer with learning rate <code>1e-4</code>.</p>
+
+                <p>We get the following training losses:</p>
+
+                <img src="media/b/part1_training_losses_UC.png" alt="img" width="auto" height="300">
+
+                <p>We generate test datapoints in the same way we generated training datapoints, except we now derive our datapoints from the test portion of MNIST. We test the UNet after each epoch.</p>
+
+                <img src="media/b/part1_epoch1.png" alt="img" width="auto" height="200">
+                <p>caption</p>
+                <img src="media/b/part1_epoch5.png" alt="img" width="auto" height="200">
+                <p>caption</p>
 
 
  </body>
