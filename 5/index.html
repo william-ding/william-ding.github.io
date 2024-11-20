@@ -198,21 +198,23 @@
 
         <h2>Part B: Diffusion Models From Scratch</h2>
 
-            In the second part of this project, we create a diffusion model that generates images which resemble digits in the <a href="https://pytorch.org/vision/stable/generated/torchvision.datasets.MNIST.html">MNIST</a> database.
+                <p>In the second part of this project, we create a diffusion model that generates images which resemble digits in the <a href="https://pytorch.org/vision/stable/generated/torchvision.datasets.MNIST.html">MNIST</a> database.</p>
 
-            Part 1: Single-Step Denoising via UNet
+            <h3>Part 1: Single-Step Denoising via UNet</h3>
 
-                Our overall goal is to generate MNIST-like images from images of pure noise. An intermediate step is to train a UNet that cleans up noisy versions of MNIST images.
+                <p>Our overall goal is to generate MNIST-like images from images of pure noise. An intermediate step is to train a UNet that cleans up noisy versions of MNIST images.</p>
 
-                We implement a UNet with the following architecture, as seen in the project spec. Unlike a diffusion model, which removes noise from an image over the course of many iterations, the UNet is designed to denoise an image in a single iteration.
+                <p>We implement a UNet with the following architecture, as seen in the project spec. Unlike a diffusion model, which removes noise from an image over the course of many iterations, the UNet is designed to denoise an image in a single iteration.</p>
 
-                We obtain training data for the UNet, we modify datapoints from the MNIST dataset. Each MNIST datapoint consists of a 28x28 image of a handwritten digit and a label indicating its value.
+                <p>We obtain training data for the UNet, we modify datapoints from the MNIST dataset. Each MNIST datapoint consists of a 28x28 image of a handwritten digit and a label indicating its value.</p>
 
-                To add noise to a clean image, we use the following formula: <code>z = x + delta * epsilon</code>, where <code>x</code> is the clean image, <code>delta</code> is a scalar constant, and <code>epsilon</code> is standard-normal noise. Each <code>(z, x)</code> pair serves as a training datapoint for the UNet; given <code>z</code>, the UNet should recover <code>x</code>. For now, we ignore the original labels of the MNIST dataset.
+                <p>To add noise to a clean image, we use the following formula: <code>z = x + delta * epsilon</code>, where <code>x</code> is the clean image, <code>delta</code> is a scalar constant, and <code>epsilon</code> is standard-normal noise. Each <code>(z, x)</code> pair serves as a training datapoint for the UNet; given <code>z</code>, the UNet should recover <code>x</code>. For now, we ignore the original labels of the MNIST dataset.</p>
 
-                Our noising process produces the following results for various values of <code>delta</code>:
+                <p>Our noising process produces the following results for various values of <code>delta</code>:</p>
 
                 <img src="media/b/part1_noising.png" alt="img" width="auto" height="400">
+
+
 
  </body>
  </html>
