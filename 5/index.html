@@ -168,26 +168,39 @@
                 <img src="media/a/part1-8_campfire.png" alt="img" width="auto" height="100">
                 <br>
                 <img src="media/a/part1-8_man.png" alt="img" width="auto" height="100">
-                <p class="caption">A visual anagram with right-side-up prompt "an oil painting of people around a campfire", upside-down prompt "an oil painting of an old man", and weight <code>w=0.7</code>.</p>
+                <p class="caption">A visual anagram with right-side-up prompt "an oil painting of people around a campfire", upside-down prompt "an oil painting of an old man", and weight <code>w = 0.7</code>.</p>
 
                 <img src="media/a/part1-8_chocolate.png" alt="img" width="auto" height="100">
                 <br>
                 <img src="media/a/part1-8_dog.png" alt="img" width="auto" height="100">
-                <p class="caption">Prompts: "an oil painting of chocolate pieces", "an oil painting of a brown dog". Weight: <code>w=0.7</code>.</p>
+                <p class="caption">Prompts: "an oil painting of chocolate pieces", "an oil painting of a brown dog". Weight: <code>w = 0.7</code>.</p>
 
                 <img src="media/a/part1-8_snow.png" alt="img" width="auto" height="100">
                 <br>
                 <img src="media/a/part1-8_coast.png" alt="img" width="auto" height="100">
-                <p class="caption">Prompts: "an oil painting of a snowy mountain village", "a photo of the amalfi cost" [sic]. Weight: <code>w=0.75</code>.</p>
+                <p class="caption">Prompts: "an oil painting of a snowy mountain village", "a photo of the amalfi cost" [sic]. Weight: <code>w = 0.75</code>.</p>
                 
 
             <h3>1.9 Hybrid Images</h3>
 
-                <p>A "hybrid image" depicts different things when viewed close-up and far-away. The far-away view relies on low-frequency features of the image, and the close-up view relies on high-frequency features. To generate a hybrid image, we need a condition prompt for its low-frequency features and a condition prompt for its high-frequency features.</p>
+                <p>A "hybrid image" depicts different things when viewed far-away and close-up. The far-away view relies on low-frequency features of the image, and the close-up view relies on high-frequency features. To generate a hybrid image, we need a condition prompt for its low-frequency features and a condition prompt for its high-frequency features.</p>
 
                 <p>As with visual anagrams, we generate hybrid images by combining our noise estimates <code>err_1</code>, <code>err_2</code> for <code>x_t</code> in each (strided) iteration of the denoising process. For hybrid images, we have <code>err = low_freq(err_1) + high_freq(err_2)</code>, where <code>low_freq</code> is a Gaussian blur filter (with kernel size of 33, sigma of 2) and <code>high_freq</code> is its complement.</p>
 
-                <span>hybrid images</span>
+                <img src="media/a/part1-9_waterfall1.png" alt="img" width="auto" height="100">
+                <br>
+                <img src="media/a/part1-9_waterfall2.png" alt="img" width="auto" height="100">
+                <p class="caption">Hybrid images with far-away prompt "a lithograph of a skull" and close-up prompt ""a lithograph of waterfalls".</p>
+
+                <img src="media/a/part1-9_rocket1.png" alt="img" width="auto" height="100">
+                <br>
+                <img src="media/a/part1-9_rocket2.png" alt="img" width="auto" height="100">
+                <p class="caption">Far-away prompt: "a pencil". Close-up prompt: "a rocket ship".</p>
+
+                <img src="media/a/part1-9_fish1.png" alt="img" width="auto" height="100">
+                <br>
+                <img src="media/a/part1-8_fish2.png" alt="img" width="auto" height="100">
+                <p class="caption">Far-away prompt: "a lithograph of planet earth". Close-up prompt: "a lithograph of blue and green fishes".</p>
 
         <h2>Part B: Diffusion Models From Scratch</h2>
 
