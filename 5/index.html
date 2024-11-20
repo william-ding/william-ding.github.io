@@ -196,6 +196,24 @@
                 <img src="media/a/part1-9_fish1.png" alt="img" width="auto" height="100">
                 <p class="caption">Far-away: "a lithograph of planet earth". Close-up: "a lithograph of blue and green fishes".</p>
 
+            <h3>B&W: Course Logo</h3>
+
+                <p>We can use our CFG-enhanced denoising process to generate images from scratch by denoising pure-noise images, as seen in 1.6. Furthermore, we can control the outputted images with a condition prompt, as suggested by 1.7.3.</p>
+
+                <p>To generate a "course logo", I tried many condition prompts with the goal of creating an appealing image of a computer with eyes. I eventually settled on these five prompts:</p>
+
+                <ul>
+                    <li>'vector art of computer monitor displaying digital eyes'</li>
+                    <li>'vector art of computer monitor displaying cartoon eyes'</li>
+                    <li>'vector art of computer monitor with eyes'</li>
+                    <li>'vector art of computer monitor with the eyes of a robot'</li>
+                    <li>'vector art of computer monitor with robot eyes'</li>
+                </ul>
+
+                <p>After viewing several outputs for each of these prompts, I selected the following image. I upscaled it to 256x256 with the second stage of DeepFloyd.</p>
+
+                <img src="media/a/courselogo.png" alt="img" width="auto" height="auto">
+
         <h2>Part B: Diffusion Models From Scratch</h2>
 
                 <p>In the second part of this project, we create a diffusion model that generates images which resemble digits in the <a href="https://pytorch.org/vision/stable/generated/torchvision.datasets.MNIST.html">MNIST</a> database.</p>
@@ -300,6 +318,6 @@
 
             <h3>B&W: Sampling GIFs</h3>
 
-                <p>During every tenth sampling timestep, we record the current value of <code>x_t</code>. This lets us create 31-frame GIFs that animate (in reverse) the sampling process for selected epochs of the time-conditional UNet, as seen above. We do the same for selected epochs of the class-conditional UNet. (I used <a href="https://ezgif.com/maker">ezgif.com/maker</a> to assemble still frames into GIFs.)
+                <p>During every tenth sampling timestep, we record the current value of <code>x_t</code>. This lets us create 31-frame GIFs that animate (in reverse) the sampling process for selected epochs of the time-conditional UNet, as seen above. We do the same for selected epochs of the class-conditional UNet. (I used <a href="https://ezgif.com/maker">ezgif.com/maker</a> to assemble still frames into GIFs.)</p>
  </body>
  </html>
