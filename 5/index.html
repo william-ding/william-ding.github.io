@@ -79,8 +79,8 @@
 
                 <img src="media/a/part1-3.png" alt="img" width="auto" height="300">
                 <p class="caption">Top: The original Campanile image; with noise (<code>t=250</code>); denoised via UNet.</p>
-                <p class="caption">Middle: Original; noise; (<code>t=500</code>); denoised.</p>
-                <p class="caption">Bottom: Original; noise; (<code>t=750</code>); denoised.</p>
+                <p class="caption">Middle: Original; noisy (<code>t=500</code>); denoised.</p>
+                <p class="caption">Bottom: Original; noisy (<code>t=750</code>); denoised.</p>
             
             <h3>1.4 Iterative Denoising</h3>
 
@@ -95,13 +95,17 @@
                 <p>We show the iterative denoising of a noisy image <code>x_690</code>.</p>
 
                 <img src="media/a/part1-4_progression.png" alt="img" width="auto" height="100">
+                <p class="caption">Selected intermediate results of denoising <code>x_690</code> with iterative denoising.</p>
+
                 <img src="media/a/part1-4_compare.png" alt="img" width="auto" height="100">
+                <p class="caption">For comparison: The results of iterative denoising, UNet denoising, and blurring on <code>x_690</code>.</p>
 
             <h3>1.5 Diffusion Model Sampling</h3>
 
                 <p>We sample an image from our denoising process by passing in a pure-noise image with timestep <code>t=990</code>. (We also pass in the default text prompt.)</p>
 
                 <img src="media/a/part1-5.png" alt="img" width="auto" height="100">
+                <p class="caption">Five samples of "a high quality photo".</p>
 
             <h3>1.6 Diffusion Model Sampling</h3>
 
@@ -112,6 +116,7 @@
                 <p>Now we sample images from our CFG-enhanced denoising process. We use the value <code>gamma = 7</code>.</p>
 
                 <img src="media/a/part1-6.png" alt="img" width="auto" height="100">
+                <p class="caption">Five CFG-enhanced samples of "a high quality photo".</p>
 
             <h3>1.7 Image-to-Image Translation</h3>
 
