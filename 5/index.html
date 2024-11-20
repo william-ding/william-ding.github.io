@@ -36,9 +36,9 @@
 
                 <p>We call both stages of the model on three text prompts, as seen below. We vary the number of inference steps of each stage of the model; increasing the number of inference steps increases the required computation.</p>
 
-                <img src="media/a/part0_steps20.png" alt="img" width="auto" height="300">
-                <img src="media/a/part0_steps5.png" alt="img" width="auto" height="300">
-                <img src="media/a/part0_steps40.png" alt="img" width="auto" height="300">
+                <img src="media/a/part0_steps20.png" alt="img" width="auto" height="220">
+                <img src="media/a/part0_steps5.png" alt="img" width="auto" height="220">
+                <img src="media/a/part0_steps40.png" alt="img" width="auto" height="220">
 
                 <p>(I used a random seed of 18,000.)</p>
 
@@ -58,7 +58,7 @@
 
                 <p>We compute <code>x_t</code> for <code>t = [250, 500, 750]</code>. Our input <code>x_0</code> is a clean image of the Campanile.</p>
 
-                <img src="media/a/part1-1.png" alt="img" width="auto" height="300">
+                <img src="media/a/part1-1.png" alt="img" width="auto" height="100">
 
             <h3>1.2 Classical Denoising</h3>
 
@@ -84,14 +84,14 @@
 
                 <p>We show the iterative denoising of a noisy image <code>x_690</code>.</p>
 
-                <img src="media/a/part1-4_progression.png" alt="img" width="auto" height="300">
-                <img src="media/a/part1-4_compare.png" alt="img" width="auto" height="300">
+                <img src="media/a/part1-4_progression.png" alt="img" width="auto" height="100">
+                <img src="media/a/part1-4_compare.png" alt="img" width="auto" height="100">
 
             <h3>1.5 Diffusion Model Sampling</h3>
 
                 <p>We sample an image from our denoising process by passing in a pure-noise image with timestep <code>t=990</code>. (We also pass in the default text prompt.)</p>
 
-                <img src="media/a/part1-5.png" alt="img" width="auto" height="300">
+                <img src="media/a/part1-5.png" alt="img" width="auto" height="100">
 
             <h3>1.6 Diffusion Model Sampling</h3>
 
@@ -101,7 +101,7 @@
 
                 <p>Now we sample images from our CFG-enhanced denoising process. We use the value <code>gamma = 7</code>.</p>
 
-                <img src="media/a/part1-6.png" alt="img" width="auto" height="300">
+                <img src="media/a/part1-6.png" alt="img" width="auto" height="100">
 
             <h3>1.7 Image-to-Image Translation</h3>
 
@@ -115,9 +115,9 @@
 
                 <p>We also perform image-to-image translations with web images and drawn images.</p>
 
-                <img src="media/a/part1-7_web.png" alt="img" width="auto" height="300">
+                <img src="media/a/part1-7_web.png" alt="img" width="auto" height="200">
 
-                <img src="media/a/part1-7_drawn.png" alt="img" width="auto" height="300">
+                <img src="media/a/part1-7_drawn.png" alt="img" width="auto" height="200">
 
 
             <h3>1.7.2 Inpainting</h3>
