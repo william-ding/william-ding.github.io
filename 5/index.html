@@ -224,7 +224,7 @@
 
                 <img src="media/b/part1_training_losses_UC.png" alt="img" width="auto" height="400">
 
-                <p>We generate test datapoints in the same way we generated training datapoints, except we now derive our datapoints from the test portion of MNIST. We test the UNet after each epoch.</p>
+                <p>We generate test datapoints in the same way we generated training datapoints, except we now derive our datapoints from the test portion of MNIST. We test the UNet after its first and fifth epochs.</p>
 
                 <img src="media/b/part1_epoch01.png" alt="img" width="auto" height="200">
                 <p class="caption">Top: Original MNIST images. Middle: With <code>delta=0.5</code> noise. Bottom: Denoised by first-epoch UNet.</p>
@@ -258,15 +258,15 @@
 
                 <img src="media/b/part2_training_losses_TC.png" alt="img" width="auto" height="400">
 
-                <p>During and after the training of the time-conditional UNet, we test it (in other words, we perform "sampling") by iteratively removing noise from a pure-noise image. Each call to the time-conditional UNet constitutes a single timestep, so we need 300 calls to arrive at a clean image.</p>
+                <p>During and after the training of the time-conditional UNet, we test it (in other words, we perform "sampling") by iteratively removing noise from a pure-noise image. Each call to the time-conditional UNet constitutes a single timestep, so we need 300 calls to arrive at a clean image. Remarkably, the test portion of MNIST is completely unnecessary.</p>
                     
-                <p>We test the following epochs of the time-conditional UNet.</p>
+                <p>We test the following epochs of the time-conditional UNet:</p>
 
                 <span>todo</span>
 
                 <p>The test results of the time-conditional UNet have many artefacts and do not always resemble actual digits. We improve on our time-conditional UNet by modifying its architecture to support a third parameter <code>c</code>: a one-hot encoding that represents a particular digit from 0 to 9. The value for <code>c</code> enters the "class-conditional" UNet at the same modules as <code>t</code>.</p>
 
-                During training, we pass in the encoded label of clean image <code>x_0</code> as the value for <code>c</code>. (To ensure the class-conditional UNet supports arbitrary generation in addition to class-specific generation, we randomly "zero out" 10% of the one-hot encodings.) Otherwise, the training for the class-conditional UNet is identical to the training for the time-conditional UNet.
+                During training, we pass in the encoded label of clean image <code>x_0</code> as the value for <code>c</code>. (To ensure the class-conditional UNet supports arbitrary generation in addition to class-specific generation, we randomly "zero out" 10% of the one-hot encodings.) Otherwise, the training the class-conditional UNet is identical to training of the time-conditional UNet.
 
                 <p>We get the following training losses for the class-conditional UNet:</p>
 
@@ -274,7 +274,7 @@
 
                 <p>Testing the class-conditional UNet is likewise similar to testing the time-conditional UNet. In our testing, we pass in specific values for <code>c</code> to ensure the class-conditional UNet supports class-specific generation.</p>
 
-                <p>We test the following epochs of the class-conditional UNet.</p>
+                <p>We test the following epochs of the class-conditional UNet:</p>
 
                 <span>todo</span>
 
