@@ -37,7 +37,53 @@
 
     <h1>Final Project: Image Quilting</h1>
 
-        <p>In this project...</p>
+            <p>In this project, we implement the "image quilting" and "texture transfer" algorithms described in <a href="https://people.eecs.berkeley.edu/~efros/research/quilting.html">"Image Quilting for Texture Synthesis and Transfer" (Efros, Freeman)</a>.</p>
+
+        <h2>Randomly Sampled Textures</h2>
+
+            <p>Texture synthesis is the creation of a similar but different version of a "texture image", or an image with repeated patterns. We begin with a highly naive approach to texture synthesis: we fill the patches of an output image by repeatedly sampling random patches from an input image.</p>
+
+            <img src="media/in_brick.png" alt="img" width="auto" height="250">
+            <img src="media/random_sampling.png" alt="img" width="auto" height="250">
+
+            <p>The resulting output is poor because it is clearly "blocky".</p>
+
+        <h2>Overlapping Patches</h2>
+
+            <p>A better approach to texture synthesis is to overlap the output patches and fill them in raster-scan order. To fill an output patch, we compute how well each input patch overlaps with the already-filled portion of the output patch. We set <code>tol=5</code>; in other words, one of the five best input patches is chosen at random to fill the output patch.</p>
+
+            <img src="media/patch_overlap.png" alt="img" width="auto" height="250">
+
+        <h2>Seam Finding</h2>
+
+            <p>The official image quilting algorithm eliminates "blocky" results by establishing curved boundaries between output patches. Once we have chosen an input patch to fill an output patch, we compute a curved cut along the output patch's overlapping portion. In particular, we compute the cut that minimizes the difference between existing pixels and new pixels along the path of the cut.</p>
+
+            <img src="media/seam_result.png" alt="img" width="auto" height="250">
+            <img src="media/seam_existing.png" alt="img" width="auto" height="250">
+            <img src="media/seam_new.png" alt="img" width="auto" height="250">
+            <img src="media/seam_error.png" alt="img" width="auto" height="250">
+            <img src="media/seam_horizontal.png" alt="img" width="auto" height="250">
+            <img src="media/seam_vertical.png" alt="img" width="auto" height="250">
+            <img src="media/seam_combined.png" alt="img" width="auto" height="250">
+
+        <h2>Additional Quilting Results</h2>
+
+            <img src="media/in_wall.png" alt="img" width="auto" height="250">
+            <img src="media/wall_synth.png" alt="img" width="auto" height="250">
+            <img src="media/in_desk.png" alt="img" width="auto" height="250">
+            <img src="media/desk_synth.png" alt="img" width="auto" height="250">
+
+        <h2>Texture Transfer</h2>
+
+            <img src="media/in_sketch.png" alt="img" width="auto" height="250">
+            <img src="media/in_feyn.png" alt="img" width="auto" height="250">
+            <img src="media/transfer1.png" alt="img" width="auto" height="250">
+
+            <img src="media/in_wallpaper.png" alt="img" width="auto" height="250">
+            <img src="media/in_kunkun.png" alt="img" width="auto" height="250">
+            <img src="media/transfer2.png" alt="img" width="auto" height="250">
+
+        <h2>B&W: Iterative Texture Transfer</h2>
 
  </body>
  </html>

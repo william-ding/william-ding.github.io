@@ -52,7 +52,7 @@
 
         <p>We need to know the two-dimensional "image coordinates" of every keypoint in every frame. We already know the image coordinates of keypoints in the first frame.</p>
 
-        <p>For each keypoint, we track the changes in the image coordinates of that keypoint with a <a href="https://docs.opencv.org/3.4/d7/d86/classcv_1_1TrackerMedianFlow.html">median flow tracker</a>. We use twenty-five trackers to determine the image coordinates of every keypoint in every frame.</p>
+        <p>For each keypoint, we track the keypoint's changing image coordinates with a <a href="https://docs.opencv.org/3.4/d7/d86/classcv_1_1TrackerMedianFlow.html">median flow tracker</a>. We use twenty-five trackers to determine the image coordinates of every keypoint in every frame.</p>
         <video width="auto" height="400" controls muted>
             <source src="media/out/tracking.webm" type="video/webm">
         </video>
