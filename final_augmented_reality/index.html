@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        
+        img {
+            /* From https://css-tricks.com/almanac/properties/i/image-rendering/ */
+            image-rendering: auto;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+            image-rendering: -webkit-optimize-contrast;
+
+            /* Center all images */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .caption {
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Final Project 1: Augmented Reality</h1>
+
+        <p>In this project, we achieve augmented reality by drawing cubes on top of a box.</p>
+
+        <p>We start by producing a video of a box that has been labelled with many evenly-spaced points. We move the camera during the video in order to capture the box from different camera positions and angles.</p>
+
+        <video width="auto" height="480" controls muted>
+            <source src="media/data/video.mp4" type="video/mp4">
+        </video>
+
+ </body>
+ </html>
