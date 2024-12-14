@@ -59,9 +59,14 @@
 
         <p>We now have enough information the compute the "camera projection matrix" of each frame. A camera projection matrix maps world coordinates to their corresponding image coordinates.</p>
 
-        <p>To draw an object in a particular frame, we specify the object's world coordinates. Then we compute its image coordinates and draw lines between its </p>
+        <p>To draw an object in a particular frame, we specify the object's world coordinates. Then we compute its image coordinates and connect them with lines.</p>
 
-        <p></p>
+        <p>In the video below, every drawn cube has a base whose world coordinates satisfy <code>z=0</code>. As a result, every cube appears to rest on the surface of the box.</p>
+
+        <video width="auto" height="400" controls muted>
+            <source src="media/out/cube.webm" type="video/webm">
+        </video>
+
 
  </body>
  </html>
