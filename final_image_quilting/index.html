@@ -44,7 +44,9 @@
             <p>Texture synthesis is the creation of a similar but different version of a "texture image", or an image with repeated patterns. We begin with a highly naive approach to texture synthesis: we fill the patches of an output image by repeatedly sampling random patches from an input image.</p>
 
             <img src="media/in_brick.png" alt="img" width="auto" height="250">
+            <p class="caption">Input (from the paper)</p>
             <img src="media/random_sampling.png" alt="img" width="auto" height="250">
+            <p class="caption">Random Sampling Output <code>(patch_size=15)</code></p>
 
             <p>The resulting output is poor because it is clearly "blocky".</p>
 
@@ -53,35 +55,58 @@
             <p>A better approach to texture synthesis is to overlap the output patches and fill them in raster-scan order. To fill an output patch, we compute how well each input patch overlaps with the already-filled portion of the output patch. We set <code>tol=5</code>; in other words, one of the five best input patches is chosen at random to fill the output patch.</p>
 
             <img src="media/patch_overlap.png" alt="img" width="auto" height="250">
+            <p class="caption">Overlapping Patches Output <code>(patch_size=25, overlap=11, tol=5)</code></p>
 
         <h2>Seam Finding</h2>
 
-            <p>The official image quilting algorithm eliminates "blocky" results by establishing curved boundaries between output patches. Once we have chosen an input patch to fill an output patch, we compute a curved cut along the output patch's overlapping portion. In particular, we compute the cut that minimizes the difference between existing pixels and new pixels along the path of the cut.</p>
+            <p>The official image quilting algorithm eliminates "blocky" results by establishing curved boundaries between output patches. Once we have chosen an input patch to fill an output patch, we compute a curved cut along the output patch's overlapping portion. In particular, we compute the cut that minimizes the difference between existing pixels and new pixels along the path of the cut. (To do this, we compute the optimal horizontal and vertical cuts separately and combine them.)</p>
 
             <img src="media/seam_result.png" alt="img" width="auto" height="250">
+            <p class="caption">Image Quilting Output <code>(patch_size=25, overlap=11, tol=5)</code></p>
+
+            <p>We display the seam-finding process for a single output patch below:</p>
+
             <img src="media/seam_existing.png" alt="img" width="auto" height="250">
+            <p class="caption">Existing pixels in output patch.</p>
             <img src="media/seam_new.png" alt="img" width="auto" height="250">
+            <p class="caption">The chosen input patch.</p>
             <img src="media/seam_error.png" alt="img" width="auto" height="250">
+            <p class="caption">Squared error between existing pixels and input patch.</p>
             <img src="media/seam_horizontal.png" alt="img" width="auto" height="250">
+            <p class="caption">Optimal horizontal cut.</p>
             <img src="media/seam_vertical.png" alt="img" width="auto" height="250">
+            <p class="caption">Optimal vertical cut.</p>
             <img src="media/seam_combined.png" alt="img" width="auto" height="250">
+            <p class="caption">Combined cut.</p>
 
         <h2>Additional Quilting Results</h2>
 
             <img src="media/in_wall.png" alt="img" width="auto" height="250">
+            <p class="caption">Input (my photo)</p>
             <img src="media/wall_synth.png" alt="img" width="auto" height="250">
+            <p class="caption">Image Quilting Output <code>(patch_size=25, overlap=11, tol=5)</code></p>
             <img src="media/in_desk.png" alt="img" width="auto" height="250">
+            <p class="caption">Input (my photo)</p>
             <img src="media/desk_synth.png" alt="img" width="auto" height="250">
+            <p class="caption">Image Quilting Output <code>(patch_size=25, overlap=11, tol=5)</code></p>
 
         <h2>Texture Transfer</h2>
 
+            <p>Description...</p>
+
             <img src="media/in_sketch.png" alt="img" width="auto" height="250">
+            <p class="caption">Texture Input (from the paper)</p>
             <img src="media/in_feyn.png" alt="img" width="auto" height="250">
+            <p class="caption">Guidance Input (from the paper)</p>
             <img src="media/transfer1.png" alt="img" width="auto" height="250">
+            <p class="caption">Texture Transfer Output <code>(patch_size=11, overlap=4, tol=3, alpha=0.5)</code></p>
 
             <img src="media/in_wallpaper.png" alt="img" width="auto" height="250">
+            <p class="caption">Texture Input (from <a href="https://wallpapers.com/background/spiral-background-3840-x-2160-4m77kphl1i90z8gi.html">wallpapers.com</a>)</p>
             <img src="media/in_kunkun.png" alt="img" width="auto" height="250">
+            <p class="caption">Guidance Input (my photo)</p>
             <img src="media/transfer2.png" alt="img" width="auto" height="250">
+            <p class="caption">Texture Transfer Output <code>(patch_size=11, overlap=4, tol=3, alpha=0.5)</code></p>
 
         <h2>B&W: Iterative Texture Transfer</h2>
 
