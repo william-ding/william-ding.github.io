@@ -50,14 +50,18 @@
         <p>We also assign three-dimensional "world coordinates" to each keypoint. We can do this easily because the keypoints are evenly-spaced on the box.</p>
         <img src="media/out/initial_keypoints_with_coords.jpg" alt="img" width="auto" height="400">
 
-        <p>We need to know the two-dimensional "image coordinates" of each keypoint in a particular frame in order to draw an object in that frame. We already know the image coordinates of keypoints in the first frame, and we want to determine the image coordinates of keypoints in other frames.</p>
+        <p>We need to know the two-dimensional "image coordinates" of every keypoint in every frame. We already know the image coordinates of keypoints in the first frame.</p>
 
         <p>For each keypoint, we track the changes in the image coordinates of that keypoint with a <a href="https://docs.opencv.org/3.4/d7/d86/classcv_1_1TrackerMedianFlow.html">median flow tracker</a>. We use twenty-five trackers to determine the image coordinates of every keypoint in every frame.</p>
         <video width="auto" height="400" controls muted>
-            <source src="media/out/tracking.mp4" type="video/mp4">
+            <source src="media/out/tracking.webm" type="video/webm">
         </video>
 
-        <p>For each frame, we now have...</p>
+        <p>We now have enough information the compute the "camera projection matrix" of each frame. A camera projection matrix maps world coordinates to their corresponding image coordinates.</p>
+
+        <p>To draw an object in a particular frame, we specify the object's world coordinates. Then we compute its image coordinates and draw lines between its </p>
+
+        <p></p>
 
  </body>
  </html>
