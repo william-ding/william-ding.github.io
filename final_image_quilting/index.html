@@ -45,10 +45,10 @@
 
             <img src="media/in_brick.png" alt="img" width="auto" height="250">
             <p class="caption">Input (from the paper)</p>
-            <img src="media/random_sampling.png" alt="img" width="auto" height="250">
+            <img src="media/random_sampling_large.png" alt="img" width="auto" height="250">
             <p class="caption">Random sampling output <code>(patch_size=15)</code></p>
 
-            <p>The resulting output is poor because it is clearly "blocky".</p>
+            <p>The resulting output is poor because it is clearly "blocky". Note that the output (300x300) is larger than the input (192x192).</p>
 
         <h2>Overlapping Patches</h2>
 
@@ -126,6 +126,6 @@
             <p class="caption">Iterative output <code>(patch_sizes=[67, 43, 27, 17, 11], overlaps=[32, 20, 12, 7, 4], tol=3, alphas=[0.1, 0.3, 0.5, 0.7, 0.9])</code></p>
 
             <p>In both examples of texture transfer, the iterative outputs fix minor issues in the non-iterative outputs. In the first example, the left half of the non-iterative output contains a region of highly-uniform, "rectangular" patches; the iterative output makes these patches less uniform. In the second example, the left half of the non-iterative output has a lot of colorful noise; the iterative output somewhat dims the noise.</p>
-            
+
  </body>
  </html>
