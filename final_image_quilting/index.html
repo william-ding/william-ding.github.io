@@ -52,7 +52,7 @@
 
         <h2>Overlapping Patches</h2>
 
-            <p>A better approach to texture synthesis is to overlap the output patches and fill them in raster-scan order. To fill an output patch, we compute how well each input patch overlaps with the already-filled portion of the output patch. We set <code>tol=5</code>; in other words, one of the five best input patches is chosen at random to fill the output patch.</p>
+            <p>A better approach to texture synthesis is to overlap the output patches and fill them in raster-scan order. To fill an output patch, we compute how well each input patch overlaps with the already-filled portion of the output patch. (This is measured as the SSD (sum of square differences) between the already-filled portion of the output patch and the corresponding portion of the input patch.) We set <code>tol=5</code>; in other words, one of the five best input patches is chosen at random to fill the output patch.</p>
 
             <img src="media/patch_overlap.png" alt="img" width="auto" height="250">
             <p class="caption">Overlapping Patches Output <code>(patch_size=25, overlap=11, tol=5)</code></p>
@@ -64,7 +64,7 @@
             <img src="media/seam_result.png" alt="img" width="auto" height="250">
             <p class="caption">Image Quilting Output <code>(patch_size=25, overlap=11, tol=5)</code></p>
 
-            <p>We display the seam-finding process for a single output patch below:</p>
+            <p>We display the seam-finding process for a single output patch below.</p>
 
             <img src="media/seam_existing.png" alt="img" width="auto" height="250">
             <p class="caption">Existing pixels in output patch.</p>
@@ -92,7 +92,11 @@
 
         <h2>Texture Transfer</h2>
 
-            <p>Description...</p>
+            <p>We can repurpose the image quilting algorithm to perform "texture transfer". During texture transfer, we reconstruct a guidance image by sampling patches from a different image, which we call the texture image.</p>
+
+            <p>To produce an output that resembles the guidance image, we introduce a "correspondence cost". For any output patch and candidate input patch, the correspondence cost of choosing the input patch is the SSD between the input patch and the patch in the guidance image that is being reconstructed. (Before computing SSD, we apply several transformations to the texture and guidance images: smoothing the images, converting the images to grayscale, and normalizing pixel values.)</p>
+
+            <p>The overall cost of selecting an input patch is the weighted average <code>alpha * overlap_cost + (1-alpha) * correspondence_cost</code> for some weight <code>alpha</code>. Note that <code>overlap_cost</code> is the existing cost that is computed from patch overlap. Once the overall cost of each input patch is known, we randomly select an input patch according to <code>tol</code> and proceed with seam-finding.</p>
 
             <img src="media/in_sketch.png" alt="img" width="auto" height="250">
             <p class="caption">Texture Input (from the paper)</p>
@@ -109,6 +113,20 @@
             <p class="caption">Texture Transfer Output <code>(patch_size=11, overlap=4, tol=3, alpha=0.5)</code></p>
 
         <h2>B&W: Iterative Texture Transfer</h2>
+            <p>We improve texture transfer by turning it into an iterative process: we perform several raster scans with decreasing values of <code>patch_size</code> and <code>overlap</code>, and increasing values of <code>alpha</code>. Starting from the second iteration, we compute "overlap cost" using the entire input patch and all existing pixels in the output patch.</p>
+
+            <img src="media/transfer1.png" alt="img" width="auto" height="250">
+            <p class="caption">Non-iterative Output (from before)<code>(patch_size=11, overlap=4, tol=3, alpha=0.5)</code></p>
+            <img src="media/transfer1_iter.png" alt="img" width="auto" height="250">
+            <p class="caption">Iterative Output <code>(patch_sizes=[67, 43, 27, 17, 11], overlaps=[32, 20, 12, 7, 4], tol=3, alphas=[0.1, 0.3, 0.5, 0.7, 0.9])</code></p>
+
+            <img src="media/transfer2.png" alt="img" width="auto" height="250">
+            <p class="caption">Non-iterative Output (from before) <code>(patch_size=11, overlap=4, tol=3, alpha=0.5)</code></p>
+            <img src="media/transfer2_iter.png" alt="img" width="auto" height="250">
+            <p class="caption">Iterative Output <code>(patch_sizes=[67, 43, 27, 17, 11], overlaps=[32, 20, 12, 7, 4], tol=3, alphas=[0.1, 0.3, 0.5, 0.7, 0.9])</code></p>
+
+
+
 
  </body>
  </html>
